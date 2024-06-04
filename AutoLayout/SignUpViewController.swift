@@ -8,7 +8,18 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
+    let appLogoImage = UIImage()
+    let signupFailureTextLabel = UILabel()
     
+    let emailOrPhoneNumberTextField = UITextField()
+    let passwordTextField = UITextField()
+    let nicknameTextField = UITextField()
+    let locationTextField = UITextField()
+    let RecommendationCodeTextField = UITextField()
+    
+    let signUpButton = UIButton()
+    let additionalInformationLabel = UILabel()
+    let additionalInformationSwitch = UISwitch()
     
     override func viewDidLoad() {
         super.viewDidLoad()
