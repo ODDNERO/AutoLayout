@@ -16,6 +16,8 @@ class SignUpViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         configureUI()
+        
+        settingNavigation()
     }
 }
 
@@ -32,5 +34,12 @@ extension SignUpViewController {
     func configureUI() {
         view.backgroundColor = .black
         
+    }
+}
+
+//MARK: - Switching View
+extension SignUpViewController {
+    func settingNavigation() {
+        navigationItem.hidesBackButton = true
     }
 }

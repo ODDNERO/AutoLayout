@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         configureUI()
+        configureBarButtonItem()
     }
 }
 
@@ -32,5 +33,17 @@ extension HomeViewController {
     func configureUI() {
         view.backgroundColor = .black
         
+    }
+}
+
+//MARK: - Switching View
+extension HomeViewController {
+    func configureBarButtonItem() {
+        let signUpButton = UIBarButtonItem(title: "SignUp", style: .plain, target: self, action: #selector(signUpButtonClicked))
+        navigationItem.rightBarButtonItem = signUpButton
+    }
+    
+    @objc func signUpButtonClicked() {
+        navigationController?.pushViewController(SignUpViewController(), animated: true)
     }
 }
