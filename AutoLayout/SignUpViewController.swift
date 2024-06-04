@@ -8,14 +8,14 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
-    let appLogoImage = UIImage()
+    let appLogoImageView = UIImageView()
     let signupFailureTextLabel = UILabel()
     
     let emailOrPhoneNumberTextField = UITextField()
     let passwordTextField = UITextField()
     let nicknameTextField = UITextField()
     let locationTextField = UITextField()
-    let RecommendationCodeTextField = UITextField()
+    let recommendationCodeTextField = UITextField()
     
     let signUpButton = UIButton()
     let additionalInformationLabel = UILabel()
@@ -35,7 +35,8 @@ class SignUpViewController: UIViewController {
 //MARK: - Configure
 extension SignUpViewController {
     func configureHierarchy() {
-        
+        [appLogoImageView, signupFailureTextLabel, emailOrPhoneNumberTextField, passwordTextField, nicknameTextField, locationTextField, recommendationCodeTextField, signUpButton, additionalInformationLabel, additionalInformationSwitch]
+            .forEach { view.addSubview($0) }
     }
     
     func configureLayout() {

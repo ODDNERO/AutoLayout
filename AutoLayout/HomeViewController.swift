@@ -35,7 +35,8 @@ class HomeViewController: UIViewController {
 //MARK: - Configure
 extension HomeViewController {
     func configureHierarchy() {
-        
+        [homeView, userNameLabel, homeMovieImage, homeMovieBackgroundImage, movieKeywordLabel, playMovieButton, wishMovieListButton, todayContentsLabel, firstTodaysMovieImage, secondTodaysMovieImage, thirdTodaysMovieImage]
+            .forEach { view.addSubview($0) }
     }
     
     func configureLayout() {
