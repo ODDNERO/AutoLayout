@@ -41,5 +41,6 @@ extension SignUpViewController {
 extension SignUpViewController {
     func settingNavigation() {
         navigationItem.hidesBackButton = true
+//        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
 }
