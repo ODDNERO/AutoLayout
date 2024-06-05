@@ -17,10 +17,25 @@ class SignUpViewController: UIViewController {
     let nicknameTextField = UITextField()
     let locationTextField = UITextField()
     let recommendationCodeTextField = UITextField()
+    let textFieldStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 22
+        return stackView
+    }()
     
     let signUpButton = UIButton()
     let additionalInformationLabel = UILabel()
     let additionalInformationSwitch = UISwitch()
+    let additionalStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        return stackView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
