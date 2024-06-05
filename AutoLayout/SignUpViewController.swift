@@ -51,8 +51,14 @@ class SignUpViewController: UIViewController {
 //MARK: - Configure
 extension SignUpViewController {
     func configureHierarchy() {
-        [appLogoImageView, signupFailureTextLabel, emailOrPhoneNumberTextField, passwordTextField, nicknameTextField, locationTextField, recommendationCodeTextField, signUpButton, additionalInformationLabel, additionalInformationSwitch]
+        [appLogoImageView, signupFailureTextLabel, textFieldStackView, signUpButton, additionalStackView]
             .forEach { view.addSubview($0) }
+        
+        [emailOrPhoneNumberTextField, passwordTextField, nicknameTextField, locationTextField, recommendationCodeTextField]
+            .forEach { textFieldStackView.addArrangedSubview($0) }
+        
+        [additionalInformationLabel, additionalInformationSwitch]
+            .forEach { additionalStackView.addArrangedSubview($0) }
     }
     
     func configureLayout() {
