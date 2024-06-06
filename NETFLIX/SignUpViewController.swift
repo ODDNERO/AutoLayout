@@ -1,6 +1,6 @@
 //
 //  SignUpViewController.swift
-//  AutoLayout
+//  NETFLIX
 //
 //  Created by NERO on 6/4/24.
 //
@@ -12,6 +12,7 @@ class SignUpViewController: UIViewController {
     let appLogoImageView = UIImageView()
     let signupFailureTextLabel = UILabel()
     
+    lazy var textFields = [emailOrPhoneNumberTextField, passwordTextField, nicknameTextField, locationTextField, recommendationCodeTextField]
     let emailOrPhoneNumberTextField = UITextField()
     let passwordTextField = UITextField()
     let nicknameTextField = UITextField()
@@ -21,7 +22,7 @@ class SignUpViewController: UIViewController {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.distribution = .fill
+        stackView.distribution = .fillEqually
         stackView.spacing = 22
         return stackView
     }()
@@ -54,8 +55,7 @@ extension SignUpViewController {
         [appLogoImageView, signupFailureTextLabel, textFieldStackView, signUpButton, additionalStackView]
             .forEach { view.addSubview($0) }
         
-        [emailOrPhoneNumberTextField, passwordTextField, nicknameTextField, locationTextField, recommendationCodeTextField]
-            .forEach { textFieldStackView.addArrangedSubview($0) }
+        textFields.forEach { textFieldStackView.addArrangedSubview($0) }
         
         [additionalInformationLabel, additionalInformationSwitch]
             .forEach { additionalStackView.addArrangedSubview($0) }
@@ -66,39 +66,14 @@ extension SignUpViewController {
     }
     
     func configureUI() {
-        view.backgroundColor = .black
-        appLogoImageView.image = .NETFLIX
-        
-        [emailOrPhoneNumberTextField, passwordTextField, nicknameTextField, locationTextField, recommendationCodeTextField].forEach {
-            $0.backgroundColor = .customGray
-            $0.attributedPlaceholder = NSAttributedString(string: $0.text ?? "", attributes: [.foregroundColor: UIColor.white])
-            $0.textColor = .white
-            $0.font = .systemFont(ofSize: 14)
-            $0.textAlignment = .center
-        }
-        
-        signupFailureTextLabel.textColor = .white
-        signupFailureTextLabel.textAlignment = .center
-        signupFailureTextLabel.numberOfLines = 0
-        
-        passwordTextField.isSecureTextEntry = true
-        recommendationCodeTextField.keyboardType = .numberPad
-        
-        signUpButton.titleLabel?.text = "회원가입"
-        signUpButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
-        signUpButton.titleLabel?.textColor = .black
-        signUpButton.backgroundColor = .white
-        signUpButton.layer.cornerRadius = 5
-        
-        additionalInformationLabel.textAlignment = .left
-        additionalInformationSwitch.onTintColor = .pointRed
+
     }
 }
 
 //MARK: - Switching View
 extension SignUpViewController {
     func settingNavigation() {
-        navigationItem.hidesBackButton = true
-//        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+        navigationController?.navigationBar.isHidden = true
     }
 }
+
