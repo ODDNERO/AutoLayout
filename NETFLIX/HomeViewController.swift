@@ -99,7 +99,8 @@ extension HomeViewController {
 //MARK: - Switching View
 extension HomeViewController {
     func configureBarButtonItem() {
-        let signUpButton = UIBarButtonItem(title: "SignUp", style: .plain, target: self, action: #selector(signUpButtonClicked))
+        let signUpButton = UIBarButtonItem(title: "로그인", style: .plain, target: self, action: #selector(signUpButtonClicked))
+        signUpButton.tintColor = .white
         navigationItem.rightBarButtonItem = signUpButton
     }
     
