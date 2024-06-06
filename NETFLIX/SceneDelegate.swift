@@ -1,6 +1,6 @@
 //
 //  SceneDelegate.swift
-//  AutoLayout
+//  NETFLIX
 //
 //  Created by NERO on 6/4/24.
 //
