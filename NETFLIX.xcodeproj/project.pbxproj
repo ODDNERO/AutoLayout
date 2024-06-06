@@ -15,6 +15,7 @@
 		CE127BFF2C0F69ED0062EA2A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */; };
 		CE71575F2C11B3D600C8ECC0 /* BoxOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71575E2C11B3D600C8ECC0 /* BoxOfficeViewController.swift */; };
 		CE7157622C11F35E00C8ECC0 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE7157612C11F35E00C8ECC0 /* SnapKit */; };
+		CE7157912C127ED300C8ECC0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE7157902C127ED300C8ECC0 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE7157622C11F35E00C8ECC0 /* SnapKit in Frameworks */,
+				CE7157912C127ED300C8ECC0 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,6 +92,7 @@
 			name = NETFLIX;
 			packageProductDependencies = (
 				CE7157612C11F35E00C8ECC0 /* SnapKit */,
+				CE7157902C127ED300C8ECC0 /* Alamofire */,
 			);
 			productName = AutoLayout;
 			productReference = CE127BE52C0F0B1F0062EA2A /* NETFLIX.app */;
@@ -121,6 +124,7 @@
 			mainGroup = CE127BDC2C0F0B1F0062EA2A;
 			packageReferences = (
 				CE7157602C11F35C00C8ECC0 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				CE71578F2C127ED300C8ECC0 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = CE127BE62C0F0B1F0062EA2A /* Products */;
 			projectDirPath = "";
@@ -385,6 +389,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		CE71578F2C127ED300C8ECC0 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -392,6 +404,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE7157602C11F35C00C8ECC0 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		CE7157902C127ED300C8ECC0 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE71578F2C127ED300C8ECC0 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
