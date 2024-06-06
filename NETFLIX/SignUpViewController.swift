@@ -66,7 +66,30 @@ extension SignUpViewController {
     }
     
     func configureUI() {
-
+        view.backgroundColor = .black
+        
+        [signupFailureTextLabel, additionalInformationLabel].forEach {
+            $0.textColor = .white
+            $0.font = .systemFont(ofSize: 16)
+        }
+        signupFailureTextLabel.textAlignment = .center
+        signupFailureTextLabel.numberOfLines = 0
+        
+        textFields.forEach {
+            $0.textAlignment = .center
+            $0.textColor = .white
+            $0.font = .systemFont(ofSize: 15)
+            $0.backgroundColor = .customGray
+            $0.layer.cornerRadius = 4
+        }
+    
+        signUpButton.titleLabel?.textAlignment = .center
+        signUpButton.setTitleColor(.black, for: .normal)
+        signUpButton.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        signUpButton.backgroundColor = .white
+        signUpButton.layer.cornerRadius = 5
+        
+        additionalInformationSwitch.onTintColor = .pointRed
     }
 }
 
