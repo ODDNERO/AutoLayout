@@ -42,6 +42,7 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         
         configureHierarchy()
+        configureData()
         configureLayout()
         configureUI()
         
@@ -61,6 +62,28 @@ extension SignUpViewController {
             .forEach { additionalStackView.addArrangedSubview($0) }
     }
     
+    func configureData() {
+        appLogoImageView.image = .NETFLIX
+        signupFailureTextLabel.text = "⚠️ 이메일과 비밀번호는 필수로 입력되어야 합니다." //임시 텍스트 설정
+        
+        let placehorderText = ["이메일 주소 또는 전화번호", "비밀번호", "닉네임", "국가", "추천 코드 입력"]
+        var index = 0
+        textFields.forEach {
+            $0.attributedPlaceholder = NSAttributedString(string: placehorderText[index], attributes: [.foregroundColor: UIColor.white])
+            index += 1
+        }
+        
+        passwordTextField.isSecureTextEntry = true
+        recommendationCodeTextField.keyboardType = .numberPad
+        
+        signUpButton.setTitle("회원가입", for: .normal)
+        additionalInformationLabel.text = "추가 정보 입력"
+        additionalInformationSwitch.isOn = true
+    }
+}
+
+//MARK: - Configure UI
+extension SignUpViewController {
     func configureLayout() {
         
     }
