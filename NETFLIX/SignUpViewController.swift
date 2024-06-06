@@ -85,7 +85,41 @@ extension SignUpViewController {
 //MARK: - Configure UI
 extension SignUpViewController {
     func configureLayout() {
+        [appLogoImageView, textFieldStackView, signUpButton, additionalStackView].forEach {
+            $0.snp.makeConstraints { $0.centerX.equalTo(view) }
+        }
         
+        appLogoImageView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.width.equalTo(180)
+            make.height.equalTo(60)
+        }
+        
+        signupFailureTextLabel.snp.makeConstraints { make in
+            make.top.equalTo(appLogoImageView.snp.bottom).offset(50)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.height.equalTo(55)
+        }
+        
+        textFieldStackView.snp.makeConstraints { make in
+            make.top.equalTo(signupFailureTextLabel.snp.bottom).offset(30)
+            make.width.equalTo(280)
+        }
+        emailOrPhoneNumberTextField.snp.makeConstraints { $0.height.equalTo(35) }
+        
+        [signUpButton, additionalStackView].forEach {
+            $0.snp.makeConstraints { $0.width.equalTo(textFieldStackView) }
+        }
+        
+        signUpButton.snp.makeConstraints { make in
+            make.top.equalTo(textFieldStackView.snp.bottom).offset(textFieldStackView.spacing)
+            make.height.equalTo(emailOrPhoneNumberTextField).offset(10)
+        }
+        
+        additionalStackView.snp.makeConstraints { make in
+            make.top.equalTo(signUpButton.snp.bottom).offset(textFieldStackView.spacing)
+            make.height.equalTo(emailOrPhoneNumberTextField)
+        }
     }
     
     func configureUI() {
