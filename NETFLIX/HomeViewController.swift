@@ -22,14 +22,17 @@ class HomeViewController: UIViewController {
     let firstTodaysMovieImage = UIImageView()
     let secondTodaysMovieImage = UIImageView()
     let thirdTodaysMovieImage = UIImageView()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureHierarchy()
         configureLayout()
         configureUI()
-        configureBarButtonItem()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        settingNavigation()
     }
 }
 
@@ -98,9 +101,11 @@ extension HomeViewController {
 
 //MARK: - Switching View
 extension HomeViewController {
-    func configureBarButtonItem() {
+    func settingNavigation() {
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.tintColor = .white
+        
         let signUpButton = UIBarButtonItem(title: "로그인", style: .plain, target: self, action: #selector(signUpButtonClicked))
-        signUpButton.tintColor = .white
         navigationItem.rightBarButtonItem = signUpButton
     }
     
