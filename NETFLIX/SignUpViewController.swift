@@ -154,6 +154,13 @@ extension SignUpViewController {
 extension SignUpViewController {
     func settingNavigation() {
         navigationController?.navigationBar.isHidden = true
+        
+        appLogoImageView.isUserInteractionEnabled = true
+        appLogoImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(logoImageClicked)))
+    }
+    
+    @objc func logoImageClicked() {
+        navigationController?.popViewController(animated: true)
     }
 }
 
