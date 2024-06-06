@@ -14,6 +14,7 @@
 		CE127BFD2C0F69A00062EA2A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127BFC2C0F69A00062EA2A /* HomeViewController.swift */; };
 		CE127BFF2C0F69ED0062EA2A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */; };
 		CE127C022C0FAD9E0062EA2A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE127C012C0FAD9E0062EA2A /* SnapKit */; };
+		CE71575F2C11B3D600C8ECC0 /* BoxOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71575E2C11B3D600C8ECC0 /* BoxOfficeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		CE127BF62C0F0B220062EA2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE127BFC2C0F69A00062EA2A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		CE71575E2C11B3D600C8ECC0 /* BoxOfficeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				CE127BEA2C0F0B1F0062EA2A /* SceneDelegate.swift */,
 				CE127BFC2C0F69A00062EA2A /* HomeViewController.swift */,
 				CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */,
+				CE71575E2C11B3D600C8ECC0 /* BoxOfficeViewController.swift */,
 				CE127BF12C0F0B220062EA2A /* Assets.xcassets */,
 				CE127BF32C0F0B220062EA2A /* LaunchScreen.storyboard */,
 				CE127BF62C0F0B220062EA2A /* Info.plist */,
@@ -148,6 +151,7 @@
 				CE127BE92C0F0B1F0062EA2A /* AppDelegate.swift in Sources */,
 				CE127BEB2C0F0B1F0062EA2A /* SceneDelegate.swift in Sources */,
 				CE127BFF2C0F69ED0062EA2A /* SignUpViewController.swift in Sources */,
+				CE71575F2C11B3D600C8ECC0 /* BoxOfficeViewController.swift in Sources */,
 				CE127BFD2C0F69A00062EA2A /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
