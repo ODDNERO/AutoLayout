@@ -144,16 +144,18 @@ extension BoxOfficeViewController {
         }
         
         movieTableView.snp.makeConstraints {
-            $0.top.equalTo(searchStackView).offset(30)
-            $0.centerX.equalTo(view.safeAreaLayoutGuide)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide).inset(30)
+            $0.top.equalTo(searchStackView.snp.bottom).offset(35)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
     }
     
     func configureUI() {
         view.backgroundColor = .black
+        movieTableView.separatorStyle = .none
+        movieTableView.backgroundColor = .clear
+        movieTableView.layer.borderColor = UIColor.systemGray3.cgColor
         
-        [dateTextField, dateSearchButton].forEach { $0.layer.cornerRadius = 22 }
+        [dateTextField, dateSearchButton, movieTableView].forEach { $0.layer.cornerRadius = 22 }
         dateTextField.layer.borderColor = UIColor.systemGray3.cgColor
         dateTextField.layer.borderWidth = 1.5
         dateTextField.tintColor = .white
