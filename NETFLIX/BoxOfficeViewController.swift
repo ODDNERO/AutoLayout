@@ -13,6 +13,7 @@ class BoxOfficeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        requestBoxOfficeData()
         
         configureHierarchy()
         configureData()
@@ -31,6 +32,26 @@ extension BoxOfficeViewController {
     
     func configureData() {
         
+    }
+}
+
+//MARK: - Network
+extension BoxOfficeViewController {
+    func requestBoxOfficeData() {
+        let date = 20240601 //테스트용 임시 날짜
+        
+        let url = BoxOffice.url + "?" + "key=\(BoxOffice.key)" + "&" + "targetDt=\(date)"
+        
+        AF.request(url).responseDecodable(of: BoxOfficeDTO.self) { dataResponse in
+            switch dataResponse.result {
+            case .success(let boxOffice):
+                print("--- success ---")
+                print(boxOffice.boxOfficeResult.dailyBoxOfficeList)
+            case .failure(let error):
+                print("--- failure ---")
+                print(error)
+            }
+        }
     }
 }
 
