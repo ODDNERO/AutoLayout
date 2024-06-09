@@ -44,6 +44,7 @@ extension BoxOfficeViewController {
     func configureData() {
         dateTextField.keyboardType = .numberPad
         dateSearchButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
+        dateTextField.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(textFieldTapped(_:))))
         
         movieTableView.delegate = self
         movieTableView.dataSource = self
@@ -169,6 +170,11 @@ extension BoxOfficeViewController {
         dateSearchButton.backgroundColor = .netflix
         dateSearchButton.layer.borderWidth = 1.5
         dateSearchButton.layer.borderColor = UIColor(resource: .pointRed).cgColor
+    }
+    
+    @objc func textFieldTapped(_ sender: UITapGestureRecognizer) {
+        dateTextField.becomeFirstResponder()
+        configureSearchButtonUI()
     }
 }
 
