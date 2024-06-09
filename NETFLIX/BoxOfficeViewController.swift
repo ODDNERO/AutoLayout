@@ -10,7 +10,17 @@ import SnapKit
 import Alamofire
 
 class BoxOfficeViewController: UIViewController {
-
+    let dateTextField = UITextField()
+    let dateSearchButton = UIButton()
+    let searchStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        return stackView
+    }()
+    
+    let movieTableView = UITableView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         requestBoxOfficeData()
@@ -27,7 +37,8 @@ class BoxOfficeViewController: UIViewController {
 //MARK: - Configure
 extension BoxOfficeViewController {
     func configureHierarchy() {
-        
+        [dateTextField, dateSearchButton].forEach { searchStackView.addArrangedSubview($0) }
+        [searchStackView, movieTableView].forEach { view.addSubview($0) }
     }
     
     func configureData() {
