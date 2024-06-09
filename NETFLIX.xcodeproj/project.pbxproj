@@ -18,6 +18,7 @@
 		CE7157912C127ED300C8ECC0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE7157902C127ED300C8ECC0 /* Alamofire */; };
 		CE7229C52C15B7EB004EDE1C /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7229C42C15B7EB004EDE1C /* APIKey.swift */; };
 		CE7229C72C15C2E2004EDE1C /* BoxOfificeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7229C62C15C2E2004EDE1C /* BoxOfificeDTO.swift */; };
+		CE7229CB2C163E93004EDE1C /* BoxOfficeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7229CA2C163E93004EDE1C /* BoxOfficeTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		CE71575E2C11B3D600C8ECC0 /* BoxOfficeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeViewController.swift; sourceTree = "<group>"; };
 		CE7229C42C15B7EB004EDE1C /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		CE7229C62C15C2E2004EDE1C /* BoxOfificeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfificeDTO.swift; sourceTree = "<group>"; };
+		CE7229CA2C163E93004EDE1C /* BoxOfficeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 				CE127BFC2C0F69A00062EA2A /* HomeViewController.swift */,
 				CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */,
 				CE71575E2C11B3D600C8ECC0 /* BoxOfficeViewController.swift */,
+				CE7229CA2C163E93004EDE1C /* BoxOfficeTableViewCell.swift */,
 				CE7229C62C15C2E2004EDE1C /* BoxOfificeDTO.swift */,
 				CE127BF12C0F0B220062EA2A /* Assets.xcassets */,
 				CE127BF32C0F0B220062EA2A /* LaunchScreen.storyboard */,
@@ -165,6 +168,7 @@
 				CE71575F2C11B3D600C8ECC0 /* BoxOfficeViewController.swift in Sources */,
 				CE7229C52C15B7EB004EDE1C /* APIKey.swift in Sources */,
 				CE127BFD2C0F69A00062EA2A /* HomeViewController.swift in Sources */,
+				CE7229CB2C163E93004EDE1C /* BoxOfficeTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
