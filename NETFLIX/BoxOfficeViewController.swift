@@ -20,11 +20,11 @@ class BoxOfficeViewController: UIViewController {
     }()
     
     let movieTableView = UITableView()
+    var movieList: [DailyBoxOfficeList] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestBoxOfficeData()
-        
+
         configureHierarchy()
         configureData()
         configureLayout()
@@ -48,18 +48,20 @@ extension BoxOfficeViewController {
 
 //MARK: - Network
 extension BoxOfficeViewController {
-    func requestBoxOfficeData() {
-        let date = 20240601 //테스트용 임시 날짜
-        
+    func requestBoxOfficeData(date: Int) {
         let url = BoxOffice.url + "?" + "key=\(BoxOffice.key)" + "&" + "targetDt=\(date)"
         
         AF.request(url).responseDecodable(of: BoxOfficeDTO.self) { dataResponse in
             switch dataResponse.result {
             case .success(let boxOffice):
-                print("--- success ---")
-                print(boxOffice.boxOfficeResult.dailyBoxOfficeList)
+                self.movieList = boxOffice.boxOfficeResult.dailyBoxOfficeList
+                self.movieTableView.reloadData()
+                sleep(1)
+                self.dateSearchButton.setTitle("🍿", for: .normal)
+                self.dateSearchButton.backgroundColor = .blue
+                self.dateSearchButton.layer.borderWidth = 3.5
             case .failure(let error):
-                print("--- failure ---")
+                self.dateSearchButton.setTitle("😢", for: .normal)
                 print(error)
             }
         }
