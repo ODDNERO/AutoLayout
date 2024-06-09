@@ -104,7 +104,10 @@ extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: BoxOfficeTableViewCell.identifier, for: indexPath) as! BoxOfficeTableViewCell
-        //셀로 데이터 전달
+        cell.rankLabel.text = movieList[indexPath.row].rank
+        cell.titleLabel.text = movieList[indexPath.row].movieName
+        cell.openDateLabel.text = movieList[indexPath.row].openDate
+        cell.backgroundColor = .clear
         return cell
     }
 }
@@ -188,5 +191,25 @@ extension BoxOfficeViewController {
         navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.white
         ]
+    }
+}
+
+import SwiftUI
+
+struct ViewControllerRepresentable: UIViewControllerRepresentable {
+    typealias UIViewControllerType = BoxOfficeViewController
+    
+    func makeUIViewController(context: Context) -> UIViewControllerType {
+        return UIViewControllerType()
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+    }
+}
+
+@available(iOS 13.0.0, *)
+struct ViewPreview: PreviewProvider {
+    static var previews: some View {
+        ViewControllerRepresentable()
     }
 }
