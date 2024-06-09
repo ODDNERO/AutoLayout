@@ -48,6 +48,24 @@ extension BoxOfficeViewController {
         movieTableView.dataSource = self
         movieTableView.register(BoxOfficeTableViewCell.self, forCellReuseIdentifier: BoxOfficeTableViewCell.identifier)
     }
+    
+    func setValidDate(_ inputDate: Int) -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
+        dateFormatter.dateFormat = "yyyyMMdd"
+        let currentDate = Int(dateFormatter.string(from: Date()))!
+
+        switch inputDate {
+        case ...20031110:
+            dateTextField.text = "20031111"
+            return 20031111
+        case (currentDate - 1)...:
+            dateTextField.text = "\(currentDate - 1)"
+            return currentDate - 1
+        default:
+            return inputDate
+        }
+    }
 }
 
 extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
