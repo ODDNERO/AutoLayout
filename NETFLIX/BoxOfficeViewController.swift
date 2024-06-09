@@ -43,10 +43,21 @@ extension BoxOfficeViewController {
     
     func configureData() {
         dateTextField.keyboardType = .numberPad
+        dateSearchButton.addTarget(self, action: #selector(searchButtonClicked), for: .touchUpInside)
         
         movieTableView.delegate = self
         movieTableView.dataSource = self
         movieTableView.register(BoxOfficeTableViewCell.self, forCellReuseIdentifier: BoxOfficeTableViewCell.identifier)
+    }
+    
+    @objc func searchButtonClicked() {
+        configureSearchButtonUI()
+        
+        guard isValidInput() else { return }
+        let intInput = Int(dateTextField.text!)!
+        
+        dateSearchButton.setTitle("🤩", for: .normal)
+        requestBoxOfficeData(date: setValidDate(intInput))
     }
     
     func isValidInput() -> Bool {
