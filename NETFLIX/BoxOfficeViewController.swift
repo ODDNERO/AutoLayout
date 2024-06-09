@@ -42,7 +42,23 @@ extension BoxOfficeViewController {
     }
     
     func configureData() {
+        dateTextField.keyboardType = .numberPad
         
+        movieTableView.delegate = self
+        movieTableView.dataSource = self
+        movieTableView.register(BoxOfficeTableViewCell.self, forCellReuseIdentifier: BoxOfficeTableViewCell.identifier)
+    }
+}
+
+extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return movieList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: BoxOfficeTableViewCell.identifier, for: indexPath) as! BoxOfficeTableViewCell
+        //셀로 데이터 전달
+        return cell
     }
 }
 
