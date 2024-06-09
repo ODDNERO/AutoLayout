@@ -73,13 +73,17 @@ extension BoxOfficeViewController {
     }
     
     func configureUI() {
-        
+        view.backgroundColor = .black
     }
 }
 
 //MARK: - Switching View
 extension BoxOfficeViewController {
     func settingNavigation() {
-        navigationController?.navigationBar.isHidden = true
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.title = "🏆 MOVIE RANK"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.white
+        ]
     }
 }
