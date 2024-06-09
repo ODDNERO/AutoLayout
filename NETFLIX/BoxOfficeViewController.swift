@@ -49,6 +49,23 @@ extension BoxOfficeViewController {
         movieTableView.register(BoxOfficeTableViewCell.self, forCellReuseIdentifier: BoxOfficeTableViewCell.identifier)
     }
     
+    func isValidInput() -> Bool {
+        guard let input = dateTextField.text, !input.isEmpty else {
+            dateSearchButton.setTitle("❎", for: .normal)
+            return false
+        }
+        configureSearchButtonUI()
+        
+        let isInputInt = Int(input) != nil
+        guard isInputInt else { dateSearchButton.setTitle("🔢", for: .normal) ; return false }
+        configureSearchButtonUI()
+        
+        guard input.count == 8 else { dateSearchButton.setTitle("8️⃣", for: .normal) ; return false }
+        configureSearchButtonUI()
+        
+        return true
+    }
+    
     func setValidDate(_ inputDate: Int) -> Int {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(identifier: "Asia/Seoul")
