@@ -39,31 +39,16 @@ class HomeViewController: UIViewController {
         label.textAlignment = .center
         return label
     }()
-    let playMovieButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        button.setTitle("재생", for: .normal)
-        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
-        button.tintColor = .black
-        button.imageEdgeInsets.right = 15
-        button.backgroundColor = .white
-        button.layer.cornerRadius = 4
-        return button
+    let playMovieButton = PointButton(title: "재생", image: UIImage(systemName: "play.fill")!, foreColor: .black, backColor: .white)
+    let wishMovieListButton = PointButton(title: "내가 찜한 리스트", image: UIImage(systemName: "plus")!, foreColor: .white, backColor: .deepDarkGray)
+    let buttonStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 15
+        stackView.distribution = .fillEqually
+        return stackView
     }()
-    let wishMovieListButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "plus"), for: .normal)
-        button.setTitle("내가 찜한 리스트", for: .normal)
-        button.titleLabel?.numberOfLines = 0
-        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
-        button.tintColor = .white
-        button.imageEdgeInsets.left = 5
-        button.imageEdgeInsets.right = 15
-        button.backgroundColor = .deepDarkGray
-        button.layer.cornerRadius = 4
-        return button
-    }()
-
+    
     let todayContentsLabel = {
         let label = UILabel()
         label.textColor = .white
@@ -105,13 +90,21 @@ class HomeViewController: UIViewController {
 //MARK: - Configure
 extension HomeViewController {
     func configureHierarchy() {
-        [homeView, userNameLabel, homeMovieImageView, movieBackgroundImageView, movieKeywordLabel, playMovieButton, wishMovieListButton, todayContentsLabel, firstTrendMovieImageView, secondTrendMovieImageView, thirdTrendMovieImageView].forEach {
+        [playMovieButton, wishMovieListButton].forEach {
+            buttonStackView.addArrangedSubview($0)
+        }
+        
+        [homeView, userNameLabel, homeMovieImageView, movieBackgroundImageView, movieKeywordLabel, buttonStackView, todayContentsLabel, firstTrendMovieImageView, secondTrendMovieImageView, thirdTrendMovieImageView].forEach {
             view.addSubview($0)
         }
     }
     
     func configureLayout() {
-
+        buttonStackView.snp.makeConstraints {
+            $0.center.equalTo(view.safeAreaLayoutGuide)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(30)
+            $0.height.equalTo(40)
+        }
     }
 }
 
