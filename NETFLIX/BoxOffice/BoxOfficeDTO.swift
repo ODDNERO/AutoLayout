@@ -1,5 +1,5 @@
 //
-//  BoxOfificeDTO.swift
+//  BoxOfficeDTO.swift
 //  NETFLIX
 //
 //  Created by NERO on 6/7/24.

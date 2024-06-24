@@ -115,7 +115,7 @@ extension BoxOfficeViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - Network
 extension BoxOfficeViewController {
     func requestBoxOfficeData(date: Int) {
-        let url = BoxOffice.url + "?" + "key=\(BoxOffice.key)" + "&" + "targetDt=\(date)"
+        let url = BoxOfficeAPI.url + "?" + "key=\(BoxOfficeAPI.key)" + "&" + "targetDt=\(date)"
         
         AF.request(url).responseDecodable(of: BoxOfficeDTO.self) { dataResponse in
             switch dataResponse.result {
@@ -191,25 +191,5 @@ extension BoxOfficeViewController {
         navigationController?.navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.white
         ]
-    }
-}
-
-import SwiftUI
-
-struct ViewControllerRepresentable: UIViewControllerRepresentable {
-    typealias UIViewControllerType = BoxOfficeViewController
-    
-    func makeUIViewController(context: Context) -> UIViewControllerType {
-        return UIViewControllerType()
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-    }
-}
-
-@available(iOS 13.0.0, *)
-struct ViewPreview: PreviewProvider {
-    static var previews: some View {
-        ViewControllerRepresentable()
     }
 }

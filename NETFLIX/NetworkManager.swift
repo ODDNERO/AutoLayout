@@ -27,16 +27,6 @@ class TrendManager {
                     print(error)
                 }
             }
-//        AF.request(url, method: .get, parameters: parameter, headers: header)
-//            .responseString {
-//                print($0)
-//                switch response.result {
-//                case .success(let movie):
-//                    completionHandler(movie)
-//                case .failure(let error):
-//                    print(error)
-//                }
-//            }
     }
 }
 
