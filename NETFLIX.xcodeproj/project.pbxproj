@@ -23,6 +23,12 @@
 		CE8CEF002C2969B1001BE6BA /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEEFF2C2969B1001BE6BA /* Resource.swift */; };
 		CE8CEF042C298240001BE6BA /* ldentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEF032C29823F001BE6BA /* ldentifierProtocol.swift */; };
 		CE8CEF062C298625001BE6BA /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEF052C298625001BE6BA /* MovieDTO.swift */; };
+		CE8CEF082C298969001BE6BA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEF072C298969001BE6BA /* NetworkManager.swift */; };
+		CE8CEF0B2C298FC3001BE6BA /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CE8CEF0A2C298FC3001BE6BA /* Kingfisher */; };
+		CE8CEF0D2C299FB5001BE6BA /* RecommendCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEF0C2C299FB5001BE6BA /* RecommendCollectionView.swift */; };
+		CE8CEF0F2C29A0AC001BE6BA /* RecommendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEF0E2C29A0AC001BE6BA /* RecommendCollectionViewCell.swift */; };
+		CE8CEF112C29DDD9001BE6BA /* SimilarCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEF102C29DDD9001BE6BA /* SimilarCollectionView.swift */; };
+		CE8CEF132C29DDF5001BE6BA /* SimilarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEF122C29DDF5001BE6BA /* SimilarCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +48,11 @@
 		CE8CEEFF2C2969B1001BE6BA /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		CE8CEF032C29823F001BE6BA /* ldentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ldentifierProtocol.swift; sourceTree = "<group>"; };
 		CE8CEF052C298625001BE6BA /* MovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
+		CE8CEF072C298969001BE6BA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		CE8CEF0C2C299FB5001BE6BA /* RecommendCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCollectionView.swift; sourceTree = "<group>"; };
+		CE8CEF0E2C29A0AC001BE6BA /* RecommendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendCollectionViewCell.swift; sourceTree = "<group>"; };
+		CE8CEF102C29DDD9001BE6BA /* SimilarCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarCollectionView.swift; sourceTree = "<group>"; };
+		CE8CEF122C29DDF5001BE6BA /* SimilarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimilarCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +91,7 @@
 				CE127BE82C0F0B1F0062EA2A /* AppDelegate.swift */,
 				CE127BEA2C0F0B1F0062EA2A /* SceneDelegate.swift */,
 				CE8CEF032C29823F001BE6BA /* ldentifierProtocol.swift */,
+				CE8CEF072C298969001BE6BA /* NetworkManager.swift */,
 				CE7229C42C15B7EB004EDE1C /* APIKey.swift */,
 				CE8CEEFC2C295B96001BE6BA /* Custom */,
 				CE8CEF012C298044001BE6BA /* Home */,
@@ -104,6 +116,10 @@
 			isa = PBXGroup;
 			children = (
 				CE8CEF052C298625001BE6BA /* MovieDTO.swift */,
+				CE8CEF0C2C299FB5001BE6BA /* RecommendCollectionView.swift */,
+				CE8CEF0E2C29A0AC001BE6BA /* RecommendCollectionViewCell.swift */,
+				CE8CEF102C29DDD9001BE6BA /* SimilarCollectionView.swift */,
+				CE8CEF122C29DDF5001BE6BA /* SimilarCollectionViewCell.swift */,
 				CE127BFC2C0F69A00062EA2A /* HomeViewController.swift */,
 				CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */,
 			);
@@ -205,13 +221,18 @@
 				CE8CEEFE2C295BAD001BE6BA /* PointButton.swift in Sources */,
 				CE8CEF002C2969B1001BE6BA /* Resource.swift in Sources */,
 				CE8CEF062C298625001BE6BA /* MovieDTO.swift in Sources */,
+				CE8CEF082C298969001BE6BA /* NetworkManager.swift in Sources */,
 				CE127BEB2C0F0B1F0062EA2A /* SceneDelegate.swift in Sources */,
 				CE127BFF2C0F69ED0062EA2A /* SignUpViewController.swift in Sources */,
 				CE71575F2C11B3D600C8ECC0 /* BoxOfficeViewController.swift in Sources */,
+				CE8CEF132C29DDF5001BE6BA /* SimilarCollectionViewCell.swift in Sources */,
 				CE7229C52C15B7EB004EDE1C /* APIKey.swift in Sources */,
 				CE127BFD2C0F69A00062EA2A /* HomeViewController.swift in Sources */,
+				CE8CEF0F2C29A0AC001BE6BA /* RecommendCollectionViewCell.swift in Sources */,
 				CE7229CB2C163E93004EDE1C /* BoxOfficeTableViewCell.swift in Sources */,
 				CE8CEF042C298240001BE6BA /* ldentifierProtocol.swift in Sources */,
+				CE8CEF112C29DDD9001BE6BA /* SimilarCollectionView.swift in Sources */,
+				CE8CEF0D2C299FB5001BE6BA /* RecommendCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
