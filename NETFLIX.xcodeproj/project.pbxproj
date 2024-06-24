@@ -15,12 +15,13 @@
 		CE127BFF2C0F69ED0062EA2A /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */; };
 		CE71575F2C11B3D600C8ECC0 /* BoxOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71575E2C11B3D600C8ECC0 /* BoxOfficeViewController.swift */; };
 		CE7229C52C15B7EB004EDE1C /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7229C42C15B7EB004EDE1C /* APIKey.swift */; };
-		CE7229C72C15C2E2004EDE1C /* BoxOfificeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7229C62C15C2E2004EDE1C /* BoxOfificeDTO.swift */; };
+		CE7229C72C15C2E2004EDE1C /* BoxOfficeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7229C62C15C2E2004EDE1C /* BoxOfficeDTO.swift */; };
 		CE7229CB2C163E93004EDE1C /* BoxOfficeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7229CA2C163E93004EDE1C /* BoxOfficeTableViewCell.swift */; };
 		CE7229CE2C164479004EDE1C /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = CE7229CD2C164479004EDE1C /* Alamofire */; };
 		CE7229D12C164482004EDE1C /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = CE7229D02C164482004EDE1C /* SnapKit */; };
 		CE8CEEFE2C295BAD001BE6BA /* PointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEEFD2C295BAD001BE6BA /* PointButton.swift */; };
 		CE8CEF002C2969B1001BE6BA /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEEFF2C2969B1001BE6BA /* Resource.swift */; };
+		CE8CEF042C298240001BE6BA /* ldentifierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEF032C29823F001BE6BA /* ldentifierProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,10 +35,11 @@
 		CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		CE71575E2C11B3D600C8ECC0 /* BoxOfficeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeViewController.swift; sourceTree = "<group>"; };
 		CE7229C42C15B7EB004EDE1C /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
-		CE7229C62C15C2E2004EDE1C /* BoxOfificeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfificeDTO.swift; sourceTree = "<group>"; };
+		CE7229C62C15C2E2004EDE1C /* BoxOfficeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeDTO.swift; sourceTree = "<group>"; };
 		CE7229CA2C163E93004EDE1C /* BoxOfficeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTableViewCell.swift; sourceTree = "<group>"; };
 		CE8CEEFD2C295BAD001BE6BA /* PointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointButton.swift; sourceTree = "<group>"; };
 		CE8CEEFF2C2969B1001BE6BA /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		CE8CEF032C29823F001BE6BA /* ldentifierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ldentifierProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,18 +74,16 @@
 		CE127BE72C0F0B1F0062EA2A /* NETFLIX */ = {
 			isa = PBXGroup;
 			children = (
-				CE8CEEFC2C295B96001BE6BA /* Custom */,
 				CE127BE82C0F0B1F0062EA2A /* AppDelegate.swift */,
 				CE127BEA2C0F0B1F0062EA2A /* SceneDelegate.swift */,
-				CE127BFC2C0F69A00062EA2A /* HomeViewController.swift */,
-				CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */,
-				CE71575E2C11B3D600C8ECC0 /* BoxOfficeViewController.swift */,
-				CE7229CA2C163E93004EDE1C /* BoxOfficeTableViewCell.swift */,
-				CE7229C62C15C2E2004EDE1C /* BoxOfificeDTO.swift */,
+				CE8CEF032C29823F001BE6BA /* ldentifierProtocol.swift */,
+				CE7229C42C15B7EB004EDE1C /* APIKey.swift */,
+				CE8CEEFC2C295B96001BE6BA /* Custom */,
+				CE8CEF012C298044001BE6BA /* Home */,
+				CE8CEF022C29807A001BE6BA /* BoxOffice */,
 				CE127BF12C0F0B220062EA2A /* Assets.xcassets */,
 				CE127BF32C0F0B220062EA2A /* LaunchScreen.storyboard */,
 				CE127BF62C0F0B220062EA2A /* Info.plist */,
-				CE7229C42C15B7EB004EDE1C /* APIKey.swift */,
 			);
 			path = NETFLIX;
 			sourceTree = "<group>";
@@ -95,6 +95,25 @@
 				CE8CEEFF2C2969B1001BE6BA /* Resource.swift */,
 			);
 			path = Custom;
+			sourceTree = "<group>";
+		};
+		CE8CEF012C298044001BE6BA /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				CE127BFC2C0F69A00062EA2A /* HomeViewController.swift */,
+				CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		CE8CEF022C29807A001BE6BA /* BoxOffice */ = {
+			isa = PBXGroup;
+			children = (
+				CE7229C62C15C2E2004EDE1C /* BoxOfficeDTO.swift */,
+				CE7229CA2C163E93004EDE1C /* BoxOfficeTableViewCell.swift */,
+				CE71575E2C11B3D600C8ECC0 /* BoxOfficeViewController.swift */,
+			);
+			path = BoxOffice;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,7 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE7229C72C15C2E2004EDE1C /* BoxOfificeDTO.swift in Sources */,
+				CE7229C72C15C2E2004EDE1C /* BoxOfficeDTO.swift in Sources */,
 				CE127BE92C0F0B1F0062EA2A /* AppDelegate.swift in Sources */,
 				CE8CEEFE2C295BAD001BE6BA /* PointButton.swift in Sources */,
 				CE8CEF002C2969B1001BE6BA /* Resource.swift in Sources */,
@@ -185,6 +204,7 @@
 				CE7229C52C15B7EB004EDE1C /* APIKey.swift in Sources */,
 				CE127BFD2C0F69A00062EA2A /* HomeViewController.swift in Sources */,
 				CE7229CB2C163E93004EDE1C /* BoxOfficeTableViewCell.swift in Sources */,
+				CE8CEF042C298240001BE6BA /* ldentifierProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,8 +9,6 @@ import UIKit
 import SnapKit
 
 class BoxOfficeTableViewCell: UITableViewCell {
-    static let identifier = "BoxOfficeTableViewCell"
-    
     let rankLabel = UILabel()
     let titleLabel = UILabel()
     let openDateLabel = UILabel()
