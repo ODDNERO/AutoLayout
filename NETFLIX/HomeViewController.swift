@@ -10,25 +10,91 @@ import SnapKit
 
 class HomeViewController: UIViewController {
     let homeView = UIView()
-    let userNameLabel = UILabel()
+    let userNameLabel = {
+        let label = UILabel()
+        label.text = "시네필 님"
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 20, weight: .heavy)
+        return label
+    }()
+    
+    let homeMovieImageView = {
+        let imageView = UIImageView()
+        imageView.image = .init(named: "겨울왕국")
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 6
+        return imageView
+    }()
+    let movieBackgroundImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleToFill
+        return imageView
+    }()
+    
+    let movieKeywordLabel = {
+        let label = UILabel()
+        label.text = "애니메이션 · 모험 · 뮤지컬 · 가족 · 판타지"
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
+    }()
+    let playMovieButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "play.fill"), for: .normal)
+        button.setTitle("재생", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        button.tintColor = .black
+        button.imageEdgeInsets.right = 15
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 4
+        return button
+    }()
+    let wishMovieListButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "plus"), for: .normal)
+        button.setTitle("내가 찜한 리스트", for: .normal)
+        button.titleLabel?.numberOfLines = 0
+        button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        button.tintColor = .white
+        button.imageEdgeInsets.left = 5
+        button.imageEdgeInsets.right = 15
+        button.backgroundColor = .deepDarkGray
+        button.layer.cornerRadius = 4
+        return button
+    }()
 
-    let homeMovieImage = UIImageView()
-    let homeMovieBackgroundImage = UIImageView()
-    let movieKeywordLabel = UILabel()
-    let playMovieButton = UIButton()
-    let wishMovieListButton = UIButton()
-
-    let todayContentsLabel = UILabel()
-    let firstTodaysMovieImage = UIImageView()
-    let secondTodaysMovieImage = UIImageView()
-    let thirdTodaysMovieImage = UIImageView()
+    let todayContentsLabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .left
+        return label
+    }()
+    let firstTrendMovieImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 4
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    let secondTrendMovieImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 4
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
+    let thirdTrendMovieImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 4
+        imageView.contentMode = .scaleAspectFill
+        return imageView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .black
         configureHierarchy()
         configureLayout()
-        configureUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,63 +105,13 @@ class HomeViewController: UIViewController {
 //MARK: - Configure
 extension HomeViewController {
     func configureHierarchy() {
-        [homeView, userNameLabel, homeMovieImage, homeMovieBackgroundImage, movieKeywordLabel, playMovieButton, wishMovieListButton, todayContentsLabel, firstTodaysMovieImage, secondTodaysMovieImage, thirdTodaysMovieImage]
-            .forEach { view.addSubview($0) }
+        [homeView, userNameLabel, homeMovieImageView, movieBackgroundImageView, movieKeywordLabel, playMovieButton, wishMovieListButton, todayContentsLabel, firstTrendMovieImageView, secondTrendMovieImageView, thirdTrendMovieImageView].forEach {
+            view.addSubview($0)
+        }
     }
     
     func configureLayout() {
 
-    }
-    
-    func configureUI() {
-        view.backgroundColor = .black
-        
-        userNameLabel.text = "시네필 님"
-        userNameLabel.textColor = .white
-        userNameLabel.textAlignment = .center
-        userNameLabel.font = .systemFont(ofSize: 20, weight: .heavy)
-        
-        homeMovieImage.image = .init(named: "겨울왕국")
-        homeMovieImage.contentMode = .scaleAspectFill
-        homeMovieBackgroundImage.contentMode = .scaleToFill
-        homeMovieImage.layer.cornerRadius = 6
-        
-        movieKeywordLabel.text = "애니메이션 · 모험 · 뮤지컬 · 가족 · 판타지"
-        movieKeywordLabel.textColor = .white
-        movieKeywordLabel.textAlignment = .center
-        
-        playMovieButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-        playMovieButton.setTitle("재생", for: .normal)
-        playMovieButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
-        playMovieButton.tintColor = .black
-        playMovieButton.imageEdgeInsets.right = 15
-        playMovieButton.backgroundColor = .white
-        playMovieButton.layer.cornerRadius = 4
-        
-        wishMovieListButton.setImage(UIImage(systemName: "plus"), for: .normal)
-        wishMovieListButton.setTitle("내가 찜한 리스트", for: .normal)
-        wishMovieListButton.titleLabel?.numberOfLines = 0
-        wishMovieListButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
-        wishMovieListButton.tintColor = .white
-        wishMovieListButton.imageEdgeInsets.left = 5
-        wishMovieListButton.imageEdgeInsets.right = 15
-        wishMovieListButton.backgroundColor = .deepDarkGray
-        wishMovieListButton.layer.cornerRadius = 4
-        
-        todayContentsLabel.textColor = .white
-        todayContentsLabel.textAlignment = .left
-        
-        firstTodaysMovieImage.layer.cornerRadius = 4
-        firstTodaysMovieImage.image = .init(named: "더퍼스트슬램덩크")
-        firstTodaysMovieImage.contentMode = .scaleAspectFill
-        
-        secondTodaysMovieImage.layer.cornerRadius = 4
-        secondTodaysMovieImage.image = .init(named: "오펜하이머")
-        secondTodaysMovieImage.contentMode = .scaleAspectFill
-        
-        thirdTodaysMovieImage.layer.cornerRadius = 4
-        thirdTodaysMovieImage.image = .init(named: "스즈메의문단속")
-        thirdTodaysMovieImage.contentMode = .scaleAspectFill
     }
 }
 
