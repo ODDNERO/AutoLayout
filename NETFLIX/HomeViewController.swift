@@ -55,25 +55,17 @@ class HomeViewController: UIViewController {
         label.textAlignment = .left
         return label
     }()
-    let firstTrendMovieImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 4
-        imageView.contentMode = .scaleAspectFill
-        return imageView
+    let firstTrendMovieImageView = Resource.movieImageView()
+    let secondTrendMovieImageView = Resource.movieImageView()
+    let thirdTrendMovieImageView = Resource.movieImageView()
+    let movieImageStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 8
+        stackView.distribution = .fillEqually
+        return stackView
     }()
-    let secondTrendMovieImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 4
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-    let thirdTrendMovieImageView = {
-        let imageView = UIImageView()
-        imageView.layer.cornerRadius = 4
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -93,17 +85,27 @@ extension HomeViewController {
         [playMovieButton, wishMovieListButton].forEach {
             buttonStackView.addArrangedSubview($0)
         }
+        [firstTrendMovieImageView, secondTrendMovieImageView, thirdTrendMovieImageView].forEach {
+            movieImageStackView.addArrangedSubview($0)
+            $0.backgroundColor = .systemGray5 //임시
+        }
         
-        [homeView, userNameLabel, homeMovieImageView, movieBackgroundImageView, movieKeywordLabel, buttonStackView, todayContentsLabel, firstTrendMovieImageView, secondTrendMovieImageView, thirdTrendMovieImageView].forEach {
+        [homeView, userNameLabel, homeMovieImageView, movieBackgroundImageView, movieKeywordLabel, buttonStackView, todayContentsLabel, movieImageStackView].forEach {
             view.addSubview($0)
         }
     }
     
     func configureLayout() {
         buttonStackView.snp.makeConstraints {
-            $0.center.equalTo(view.safeAreaLayoutGuide)
-            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(30)
-            $0.height.equalTo(40)
+            $0.center.equalTo(view.safeAreaLayoutGuide) //임시
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(30) //임시
+            $0.height.equalTo(38)
+        }
+        
+        movieImageStackView.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(10)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
+            $0.height.equalTo(160)
         }
     }
 }
