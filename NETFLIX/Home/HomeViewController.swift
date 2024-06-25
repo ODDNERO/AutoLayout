@@ -101,8 +101,12 @@ class HomeViewController: UIViewController {
         settingTop3MovieImage()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewIsAppearing(_ animated: Bool) {
         settingNavigation()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
     }
 }
 
@@ -274,8 +278,14 @@ extension HomeViewController {
 //MARK: - Switching View
 extension HomeViewController {
     func settingNavigation() {
+        navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.tintColor = .white
+        navigationItem.title = "시네필 님"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.white,
+            .font: UIFont.systemFont(ofSize: 18, weight: .heavy)
+        ]
         
         let signUpButton = UIBarButtonItem(title: "로그인", style: .plain, target: self, action: #selector(signUpButtonClicked))
         navigationItem.rightBarButtonItem = signUpButton
