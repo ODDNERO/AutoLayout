@@ -71,7 +71,7 @@ class HomeViewController: UIViewController {
     }()
     var trendMovieList: [Result] = []
     
-    let similarMovieLabel = {
+    lazy var similarMovieLabel = {
         let label = UILabel()
         label.text = "비슷한 영화"
         label.textColor = .white
@@ -83,7 +83,7 @@ class HomeViewController: UIViewController {
         MovieCollectionViewFlowLayout()
     }
     
-    let recommendMovieLabel = {
+    lazy var recommendMovieLabel = {
         let label = UILabel()
         label.text = "추천 영화"
         label.textColor = .white
@@ -91,9 +91,7 @@ class HomeViewController: UIViewController {
         label.font = .systemFont(ofSize: 17, weight: .heavy)
         return label
     }()
-    lazy var recommendCollectionView = RecommendCollectionView {
-        MovieCollectionViewFlowLayout()
-    }
+    lazy var recommendCollectionView = RecommendCollectionView(layout: MovieCollectionViewFlowLayout)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,6 +136,7 @@ extension HomeViewController {
                 self.similarCollectionView.similarList = movie.results
             }
         }
+        self.configure()
     }
     @objc func secondMovieClicked() {
         TrendManager.requestMovieData { movie in
@@ -149,6 +148,7 @@ extension HomeViewController {
                 self.similarCollectionView.similarList = movie.results
             }
         }
+        self.configure()
     }
     @objc func thirdMovieClicked() {
         TrendManager.requestMovieData { movie in
@@ -160,6 +160,7 @@ extension HomeViewController {
                 self.similarCollectionView.similarList = movie.results
             }
         }
+        self.configure()
     }
 }
 
@@ -173,13 +174,44 @@ extension HomeViewController {
             movieImageStackView.addArrangedSubview($0)
         }
         
-        [todayTrendMovieLabel, movieImageStackView, buttonStackView, similarMovieLabel, similarCollectionView, recommendMovieLabel, recommendCollectionView].forEach {
-            view.addSubview($0)
+        //        [todayTrendMovieLabel, movieImageStackView, buttonStackView, similarMovieLabel, similarCollectionView, recommendMovieLabel, recommendCollectionView].forEach {
+        //            view.addSubview($0)
+        //        }
+        
+        [todayTrendMovieLabel, movieImageStackView, buttonStackView].forEach {
+            self.view.addSubview($0)
         }
-
 //        [homeView, userNameLabel, homeMovieImageView, movieBackgroundImageView, movieKeywordLabel].forEach {
 //            view.addSubview($0)
 //        }
+    }
+    
+    func configure() {
+        [similarMovieLabel, similarCollectionView, recommendMovieLabel, recommendCollectionView].forEach {
+            view.addSubview($0)
+        }
+        
+        similarMovieLabel.snp.makeConstraints {
+            $0.top.equalTo(buttonStackView.snp.bottom).offset(18)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
+            $0.height.equalTo(30)
+        }
+        similarCollectionView.snp.makeConstraints {
+            $0.top.equalTo(similarMovieLabel.snp.bottom).offset(3)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(160)
+        }
+        
+        recommendMovieLabel.snp.makeConstraints {
+            $0.top.equalTo(similarCollectionView.snp.bottom).offset(10)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
+            $0.height.equalTo(30)
+        }
+        recommendCollectionView.snp.makeConstraints {
+            $0.top.equalTo(recommendMovieLabel.snp.bottom).offset(3)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(160)
+        }
     }
     
     func MovieCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
@@ -215,27 +247,27 @@ extension HomeViewController {
             $0.height.equalTo(38)
         }
         
-        similarMovieLabel.snp.makeConstraints {
-            $0.top.equalTo(buttonStackView.snp.bottom).offset(18)
-            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
-            $0.height.equalTo(30)
-        }
-        similarCollectionView.snp.makeConstraints {
-            $0.top.equalTo(similarMovieLabel.snp.bottom).offset(3)
-            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(160)
-        }
-        
-        recommendMovieLabel.snp.makeConstraints {
-            $0.top.equalTo(similarCollectionView.snp.bottom).offset(10)
-            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
-            $0.height.equalTo(30)
-        }
-        recommendCollectionView.snp.makeConstraints {
-            $0.top.equalTo(recommendMovieLabel.snp.bottom).offset(3)
-            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(160)
-        }
+//        similarMovieLabel.snp.makeConstraints {
+//            $0.top.equalTo(buttonStackView.snp.bottom).offset(18)
+//            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
+//            $0.height.equalTo(30)
+//        }
+//        similarCollectionView.snp.makeConstraints {
+//            $0.top.equalTo(similarMovieLabel.snp.bottom).offset(3)
+//            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+//            $0.height.equalTo(160)
+//        }
+//        
+//        recommendMovieLabel.snp.makeConstraints {
+//            $0.top.equalTo(similarCollectionView.snp.bottom).offset(10)
+//            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
+//            $0.height.equalTo(30)
+//        }
+//        recommendCollectionView.snp.makeConstraints {
+//            $0.top.equalTo(recommendMovieLabel.snp.bottom).offset(3)
+//            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+//            $0.height.equalTo(160)
+//        }
     }
 }
 
