@@ -10,16 +10,6 @@ import SnapKit
 import Kingfisher
 
 class HomeViewController: UIViewController {
-//    let homeView = UIView()
-//    let userNameLabel = {
-//        let label = UILabel()
-//        label.text = "시네필 님"
-//        label.textColor = .white
-//        label.textAlignment = .center
-//        label.font = .systemFont(ofSize: 20, weight: .heavy)
-//        return label
-//    }()
-//    
 //    let homeMovieImageView = {
 //        let imageView = UIImageView()
 //        imageView.image = .init(named: "겨울왕국")
@@ -69,36 +59,30 @@ class HomeViewController: UIViewController {
         stackView.distribution = .fillEqually
         return stackView
     }()
-    var trendMovieList: [Result] = []
     
-    lazy var similarMovieLabel = {
-        let label = UILabel()
-        label.text = "비슷한 영화"
-        label.textColor = .white
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: 17, weight: .heavy)
-        return label
-    }()
-    lazy var similarCollectionView = SimilarCollectionView {
-        MovieCollectionViewFlowLayout()
+    var top3MovieIDList = [0, 0, 0]
+    var movieID = 0 {
+        didSet {
+            self.fetchMoviePostgerImages()
+        }
     }
     
-    lazy var recommendMovieLabel = {
-        let label = UILabel()
-        label.text = "추천 영화"
-        label.textColor = .white
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: 17, weight: .heavy)
-        return label
+    var trendMovieList = [[TMDBList()], [TMDBList()]]
+    lazy var homeTableView = {
+        let tableView =  UITableView()
+        tableView.backgroundColor = .clear
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.identifier)
+        return tableView
     }()
-    lazy var recommendCollectionView = RecommendCollectionView(layout: MovieCollectionViewFlowLayout)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
         configureLayout()
         configureSetting()
-        settingTop3MovieImage()
+        settingTop3Movie()
     }
     
     override func viewIsAppearing(_ animated: Bool) {
@@ -110,15 +94,57 @@ class HomeViewController: UIViewController {
     }
 }
 
+//MARK: - TableView
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return trendMovieList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: HomeTableViewCell.identifier, for: indexPath) as! HomeTableViewCell
+        cell.setLabelText(index: indexPath.row)
+        cell.homeCollectionView.delegate = self
+        cell.homeCollectionView.dataSource = self
+        cell.homeCollectionView.register(HomeCollectionViewCell.self, forCellWithReuseIdentifier: HomeCollectionViewCell.identifier)
+        cell.homeCollectionView.tag = indexPath.row
+        cell.homeCollectionView.reloadData()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
+    }
+}
+
+//MARK: - CollectionView
+extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        for num in 0...collectionView.tag {
+            if num == collectionView.tag {
+                return trendMovieList[num].count
+            }
+        }
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifier, for: indexPath) as! HomeCollectionViewCell
+        let movieImageSource = trendMovieList[collectionView.tag][indexPath.item].poster_path
+        cell.setMovieImage(url: "\(TMDBAPI.imageURL)\(movieImageSource)")
+        return cell
+    }
+}
+
 //MARK: - Network
 extension HomeViewController {
-    func settingTop3MovieImage() {
+    func settingTop3Movie() {
         let imageViews = [firstTrendMovieImageView, secondTrendMovieImageView, thirdTrendMovieImageView]
-        for index in 0...2 {
+        for index in 0..<imageViews.count {
             TrendManager.requestMovieData { movie in
                 let movieImageSource = movie.results[index].poster_path
-                let url = URL(string: "\(TMDB.imageURL)\(movieImageSource!)")
+                let url = URL(string: "\(TMDBAPI.imageURL)\(movieImageSource)")
                 imageViews[index].kf.setImage(with: url)
+                self.top3MovieIDList[index] = movie.results[index].id
             }
         }
     }
@@ -131,45 +157,50 @@ extension HomeViewController {
     }
     
     @objc func firstMovieClicked() {
-        TrendManager.requestMovieData { movie in
-            let movieID = movie.results[0].id
-            MovieManager(movieID: movieID, requestCategory: MovieRequest.recommendations).requestMovieData { movie in
-                self.recommendCollectionView.recommendList = movie.results
-            }
-            MovieManager(movieID: movieID, requestCategory: MovieRequest.similar).requestMovieData { movie in
-                self.similarCollectionView.similarList = movie.results
-            }
-        }
-        self.configure()
+        showTableView()
+        self.movieID = self.top3MovieIDList[0]
     }
     @objc func secondMovieClicked() {
-        TrendManager.requestMovieData { movie in
-            let movieID = movie.results[1].id
-            MovieManager(movieID: movieID, requestCategory: MovieRequest.recommendations).requestMovieData { movie in
-                self.recommendCollectionView.recommendList = movie.results
-            }
-            MovieManager(movieID: movieID, requestCategory: MovieRequest.similar).requestMovieData { movie in
-                self.similarCollectionView.similarList = movie.results
-            }
-        }
-        self.configure()
+        showTableView()
+        self.movieID = self.top3MovieIDList[1]
     }
     @objc func thirdMovieClicked() {
-        TrendManager.requestMovieData { movie in
-            let movieID = movie.results[2].id
-            MovieManager(movieID: movieID, requestCategory: MovieRequest.recommendations).requestMovieData { movie in
-                self.recommendCollectionView.recommendList = movie.results
-            }
-            MovieManager(movieID: movieID, requestCategory: MovieRequest.similar).requestMovieData { movie in
-                self.similarCollectionView.similarList = movie.results
+        showTableView()
+        self.movieID = self.top3MovieIDList[2]
+    }
+    
+    func fetchMoviePostgerImages() {
+        let group = DispatchGroup()
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            MovieManager(movieID: self.movieID, requestCategory: RequestCategory.recommendations).requestMovieData { movie in
+                self.trendMovieList[0] = movie.results
+                group.leave()
             }
         }
-        self.configure()
+        group.enter()
+        DispatchQueue.global().async(group: group) {
+            MovieManager(movieID: self.movieID, requestCategory: RequestCategory.similar).requestMovieData { movie in
+                self.trendMovieList[1] = movie.results
+                group.leave()
+            }
+        }
+        group.notify(queue: .main) {
+            self.homeTableView.reloadData()
+        }
     }
 }
 
 //MARK: - UI
 extension HomeViewController {
+    func showTableView() {
+        view.addSubview(homeTableView)
+        homeTableView.snp.makeConstraints {
+            $0.top.equalTo(buttonStackView.snp.bottom).offset(18)
+            $0.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
     func configureHierarchy() {
         [playMovieButton, wishMovieListButton].forEach {
             buttonStackView.addArrangedSubview($0)
@@ -178,63 +209,18 @@ extension HomeViewController {
             movieImageStackView.addArrangedSubview($0)
         }
         
-        //        [todayTrendMovieLabel, movieImageStackView, buttonStackView, similarMovieLabel, similarCollectionView, recommendMovieLabel, recommendCollectionView].forEach {
-        //            view.addSubview($0)
-        //        }
-        
         [todayTrendMovieLabel, movieImageStackView, buttonStackView].forEach {
             self.view.addSubview($0)
         }
+
 //        [homeView, userNameLabel, homeMovieImageView, movieBackgroundImageView, movieKeywordLabel].forEach {
 //            view.addSubview($0)
 //        }
     }
-    
-    func configure() {
-        [similarMovieLabel, similarCollectionView, recommendMovieLabel, recommendCollectionView].forEach {
-            view.addSubview($0)
-        }
-        
-        similarMovieLabel.snp.makeConstraints {
-            $0.top.equalTo(buttonStackView.snp.bottom).offset(18)
-            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
-            $0.height.equalTo(30)
-        }
-        similarCollectionView.snp.makeConstraints {
-            $0.top.equalTo(similarMovieLabel.snp.bottom).offset(3)
-            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(160)
-        }
-        
-        recommendMovieLabel.snp.makeConstraints {
-            $0.top.equalTo(similarCollectionView.snp.bottom).offset(10)
-            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
-            $0.height.equalTo(30)
-        }
-        recommendCollectionView.snp.makeConstraints {
-            $0.top.equalTo(recommendMovieLabel.snp.bottom).offset(3)
-            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(160)
-        }
-    }
-    
-    func MovieCollectionViewFlowLayout() -> UICollectionViewFlowLayout {
-        let layout = UICollectionViewFlowLayout()
-        let sectionSpacing: CGFloat = 10
-        let cellSpacing: CGFloat = 10
-        let cellCount = 3.3
-        let width = (UIScreen.main.bounds.width - (sectionSpacing * 1) - (cellSpacing * 3)) / cellCount
-        
-        layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: width, height: width * 1.4)
-        layout.minimumInteritemSpacing = 10
-        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        return layout
-    }
-    
+
     func configureLayout() {
         todayTrendMovieLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide).inset(10)
+            $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
             $0.height.equalTo(30)
         }
@@ -250,28 +236,6 @@ extension HomeViewController {
             $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(30)
             $0.height.equalTo(38)
         }
-        
-//        similarMovieLabel.snp.makeConstraints {
-//            $0.top.equalTo(buttonStackView.snp.bottom).offset(18)
-//            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
-//            $0.height.equalTo(30)
-//        }
-//        similarCollectionView.snp.makeConstraints {
-//            $0.top.equalTo(similarMovieLabel.snp.bottom).offset(3)
-//            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-//            $0.height.equalTo(160)
-//        }
-//        
-//        recommendMovieLabel.snp.makeConstraints {
-//            $0.top.equalTo(similarCollectionView.snp.bottom).offset(10)
-//            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
-//            $0.height.equalTo(30)
-//        }
-//        recommendCollectionView.snp.makeConstraints {
-//            $0.top.equalTo(recommendMovieLabel.snp.bottom).offset(3)
-//            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-//            $0.height.equalTo(160)
-//        }
     }
 }
 

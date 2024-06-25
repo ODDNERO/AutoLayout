@@ -9,12 +9,13 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class SimilarCollectionViewCell: UICollectionViewCell {
+class HomeCollectionViewCell: UICollectionViewCell {
     let movieImageView = Resource.movieImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureLayout()
+        self.backgroundColor = .clear
     }
     
     required init?(coder: NSCoder) {
@@ -22,7 +23,7 @@ class SimilarCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension SimilarCollectionViewCell {
+extension HomeCollectionViewCell {
     func configureLayout() {
         contentView.addSubview(movieImageView)
         movieImageView.snp.makeConstraints {
@@ -30,7 +31,7 @@ extension SimilarCollectionViewCell {
         }
     }
     
-    func update(url: String) {
+    func setMovieImage(url: String) {
         let url = URL(string: url)
         movieImageView.kf.setImage(with: url)
     }
