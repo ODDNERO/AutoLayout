@@ -1,5 +1,5 @@
 //
-//  BoxOfficeDTO.swift
+//  BoxOffice.swift
 //  NETFLIX
 //
 //  Created by NERO on 6/7/24.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: - BoxOfficeDTO
-struct BoxOfficeDTO: Decodable {
+// MARK: - BoxOffice
+struct BoxOffice: Decodable {
     let boxOfficeResult: BoxOfficeResult
 }
 

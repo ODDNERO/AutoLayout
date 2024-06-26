@@ -117,7 +117,7 @@ extension BoxOfficeViewController {
     func requestBoxOfficeData(date: Int) {
         let url = BoxOfficeAPI.url + "?" + "key=\(BoxOfficeAPI.key)" + "&" + "targetDt=\(date)"
         
-        AF.request(url).responseDecodable(of: BoxOfficeDTO.self) { dataResponse in
+        AF.request(url).responseDecodable(of: BoxOffice.self) { dataResponse in
             switch dataResponse.result {
             case .success(let boxOffice):
                 self.movieList = boxOffice.boxOfficeResult.dailyBoxOfficeList
