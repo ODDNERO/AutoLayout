@@ -140,12 +140,31 @@ extension HomeViewController {
     func settingTop3Movie() {
         let imageViews = [firstTrendMovieImageView, secondTrendMovieImageView, thirdTrendMovieImageView]
         for index in 0..<imageViews.count {
-            TrendManager.requestMovieData { movie in
-                let movieImageSource = movie.results[index].poster_path
-                let url = URL(string: "\(TMDBAPI.imageURL)\(movieImageSource)")
-                imageViews[index].kf.setImage(with: url)
-                self.top3MovieIDList[index] = movie.results[index].id
-            }
+            NetworkManager.shared.trend(api: .trendMovie, completionHandler: { movieList, errorText in
+                if let errorText {
+                    var dummyList = Dummy.shared.trend.shuffled()
+                    let imageSource = dummyList[index].poster_path
+                    let url = URL(string: "\(TMDBAPI.imageURL)\(imageSource)")
+                    self.todayTrendMovieLabel.text = "👀 짱구 극장판 👀"
+                    imageViews[index].kf.setImage(with: url)
+//                    if imageViews[index].image == nil {
+//                        dummyList.forEach {
+//                            let imageSource = $0.poster_path
+//                            let url = URL(string: "\(TMDBAPI.imageURL)\(imageSource)")
+//                            imageViews[index].kf.setImage(with: url)
+//                            if imageViews[index].image != nil { dummyList[index] = $0; return }
+//                        }
+//                    }
+                    self.top3MovieIDList[index] = dummyList[index].id
+                } else {
+                    guard let movieList else { return }
+                    let movieImageSource = movieList[index].poster_path
+                    let url = URL(string: "\(TMDBAPI.imageURL)\(movieImageSource)")
+                    self.todayTrendMovieLabel.text = "🔥 오늘의 인기 영화 TOP3 🔥"
+                    imageViews[index].kf.setImage(with: url)
+                    self.top3MovieIDList[index] = movieList[index].id
+                }
+            })
         }
     }
     
@@ -173,15 +192,27 @@ extension HomeViewController {
         let group = DispatchGroup()
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MovieManager(movieID: self.movieID, requestCategory: RequestCategory.recommendations).requestMovieData { movie in
-                self.trendMovieList[0] = movie.results
+            NetworkManager.shared.trend(api: .recommendations(ID: self.movieID)) { movieList, errorText in
+                if let errorText {
+                    let dummyList = Dummy.shared.recommendations.shuffled()
+                    self.trendMovieList[0] = dummyList
+                } else {
+                    guard let movieList else { return }
+                    self.trendMovieList[0] = movieList
+                }
                 group.leave()
             }
         }
         group.enter()
         DispatchQueue.global().async(group: group) {
-            MovieManager(movieID: self.movieID, requestCategory: RequestCategory.similar).requestMovieData { movie in
-                self.trendMovieList[1] = movie.results
+            NetworkManager.shared.trend(api: .similar(ID: self.movieID)) { movieList, errorText in
+                if let errorText {
+                    let dummyList = Dummy.shared.similar.shuffled()
+                    self.trendMovieList[1] = dummyList
+                } else {
+                    guard let movieList else { return }
+                    self.trendMovieList[1] = movieList
+                }
                 group.leave()
             }
         }
