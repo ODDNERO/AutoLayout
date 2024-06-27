@@ -132,20 +132,11 @@ class Dummy {
         TMDBList(
             id: 38383,
             title: "짱구는 못말려 극장판: 암흑 마왕 대추적",
-            poster_path: "/A7iqpXGH7eFDfHEowJ68VN0mEK5.jpg",
+            poster_path: "/mC7ICPzXL7kEBDjeyXWpYHzxUcg.jpg",
             backdrop_path: "/pug99wOi6pAWl1Us3hMNa0mbFF6.jpg",
             release_date: "1997-04-19",
             vote_average: 6.7,
             overview: "액션가면의 팬인 짱구는 TV를 통해 이상한 할아버지로부터..."
-        ),
-        TMDBList(
-            id: 171328,
-            title: "짱구는 못말려 극장판: 어른제국의 역습",
-            poster_path: "/pIApDZScdv1znRLD7YVbSlp11yz.jpg",
-            backdrop_path: "/qsZ6fNyMWboor0nWkIu4r2PZavz.jpg",
-            release_date: "2001-04-21",
-            vote_average: 8.363,
-            overview: "시공을 초월한 마을에 어른들이 빠지면서 벌어지는 사건..."
         )
     ]
     

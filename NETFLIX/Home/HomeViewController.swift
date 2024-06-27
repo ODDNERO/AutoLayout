@@ -147,14 +147,6 @@ extension HomeViewController {
                     let url = URL(string: "\(TMDBAPI.imageURL)\(imageSource)")
                     self.todayTrendMovieLabel.text = "👀 짱구 극장판 👀"
                     imageViews[index].kf.setImage(with: url)
-//                    if imageViews[index].image == nil {
-//                        dummyList.forEach {
-//                            let imageSource = $0.poster_path
-//                            let url = URL(string: "\(TMDBAPI.imageURL)\(imageSource)")
-//                            imageViews[index].kf.setImage(with: url)
-//                            if imageViews[index].image != nil { dummyList[index] = $0; return }
-//                        }
-//                    }
                     self.top3MovieIDList[index] = dummyList[index].id
                 } else {
                     guard let movieList else { return }
@@ -192,9 +184,9 @@ extension HomeViewController {
         let group = DispatchGroup()
         group.enter()
         DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.trend(api: .recommendations(ID: self.movieID)) { movieList, errorText in
+            NetworkManager.shared.trend(api: .similar(ID: self.movieID)) { movieList, errorText in
                 if let errorText {
-                    let dummyList = Dummy.shared.recommendations.shuffled()
+                    let dummyList = Dummy.shared.similar.shuffled()
                     self.trendMovieList[0] = dummyList
                 } else {
                     guard let movieList else { return }
@@ -205,9 +197,9 @@ extension HomeViewController {
         }
         group.enter()
         DispatchQueue.global().async(group: group) {
-            NetworkManager.shared.trend(api: .similar(ID: self.movieID)) { movieList, errorText in
+            NetworkManager.shared.trend(api: .recommendations(ID: self.movieID)) { movieList, errorText in
                 if let errorText {
-                    let dummyList = Dummy.shared.similar.shuffled()
+                    let dummyList = Dummy.shared.recommendations.shuffled()
                     self.trendMovieList[1] = dummyList
                 } else {
                     guard let movieList else { return }

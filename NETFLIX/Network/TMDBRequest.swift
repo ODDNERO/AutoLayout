@@ -28,12 +28,15 @@ enum TMDBRequest {
         switch self {
         case .trendMovie:
             URL(string: baseURL + APIVersion + "trending/movie/day")!
+//            URL(string: baseURL + APIVersion + "trending/movie/day!")! //에러 테스트용
         case .trendTV:
             URL(string: baseURL + APIVersion + "trending/tv/day")!
         case .similar(let ID):
             URL(string: baseURL + APIVersion + "movie/\(ID)/similar")!
+//            URL(string: baseURL + APIVersion + "movie/\(ID)/similar!")! //에러 테스트용
         case .recommendations(let ID):
             URL(string: baseURL + APIVersion + "movie/\(ID)/recommendations")!
+//            URL(string: baseURL + APIVersion + "movie/\(ID)/recommendations!")! //에러 테스트용
         case .search:
             URL(string: baseURL + APIVersion + "search/movie")!
         case .movieImages(let ID):
