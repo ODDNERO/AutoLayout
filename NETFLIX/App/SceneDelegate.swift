@@ -23,8 +23,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let firstNav = UINavigationController(rootViewController: homeVC)
         let secondNav = UINavigationController(rootViewController: boxOfficeVC)
         
-        firstNav.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house.fill"), tag: 0)
-        secondNav.tabBarItem = UITabBarItem(title: "박스오피스", image: UIImage(systemName: "movieclapper.fill"), tag: 1)
+        firstNav.tabBarItem = UITabBarItem(title: "홈", image: UIImage(systemName: "house.fill"), selectedImage: UIImage(systemName: "house.fill"))
+        secondNav.tabBarItem = UITabBarItem(title: "박스오피스", image: UIImage(systemName: "movieclapper.fill"), selectedImage: UIImage(systemName: "movieclapper.fill"))
         
         tabBarController.tabBar.tintColor = .white
         tabBarController.tabBar.unselectedItemTintColor = .gray

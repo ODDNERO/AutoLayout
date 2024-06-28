@@ -90,12 +90,12 @@
 		CE127BE72C0F0B1F0062EA2A /* NETFLIX */ = {
 			isa = PBXGroup;
 			children = (
+				CE8D1D4A2C2D11730089C413 /* App */,
+				CE8D1D4B2C2D11860089C413 /* Extension */,
 				CE8CEF3D2C2C29F8001BE6BA /* Network */,
-				CE127BE82C0F0B1F0062EA2A /* AppDelegate.swift */,
-				CE127BEA2C0F0B1F0062EA2A /* SceneDelegate.swift */,
-				CE8CEF032C29823F001BE6BA /* ldentifierProtocol.swift */,
 				CE8CEEFC2C295B96001BE6BA /* Custom */,
 				CE8CEF012C298044001BE6BA /* Home */,
+				CE8D1D4C2C2D11B00089C413 /* SignUp */,
 				CE8CEF022C29807A001BE6BA /* BoxOffice */,
 				CE127BF12C0F0B220062EA2A /* Assets.xcassets */,
 				CE127BF32C0F0B220062EA2A /* LaunchScreen.storyboard */,
@@ -120,7 +120,6 @@
 				CE8CEF342C2ADE9B001BE6BA /* HomeTableViewCell.swift */,
 				CE8CEF102C29DDD9001BE6BA /* HomeCollectionView.swift */,
 				CE8CEF122C29DDF5001BE6BA /* HomeCollectionViewCell.swift */,
-				CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -139,12 +138,37 @@
 			children = (
 				CE8CEF072C298969001BE6BA /* NetworkManager.swift */,
 				CE7229C42C15B7EB004EDE1C /* APIKey.swift */,
-				CE8CEF3B2C2C29E7001BE6BA /* TMDBRequest.swift */,
 				CE8CEF052C298625001BE6BA /* TMDB.swift */,
+				CE8CEF3B2C2C29E7001BE6BA /* TMDBRequest.swift */,
 				CE8CEF3E2C2C621C001BE6BA /* Dummy.swift */,
 				CE7229C62C15C2E2004EDE1C /* BoxOffice.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		CE8D1D4A2C2D11730089C413 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				CE127BE82C0F0B1F0062EA2A /* AppDelegate.swift */,
+				CE127BEA2C0F0B1F0062EA2A /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		CE8D1D4B2C2D11860089C413 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CE8CEF032C29823F001BE6BA /* ldentifierProtocol.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		CE8D1D4C2C2D11B00089C413 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */,
+			);
+			path = SignUp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
