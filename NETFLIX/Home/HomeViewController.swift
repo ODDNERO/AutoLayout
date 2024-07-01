@@ -81,6 +81,7 @@ final class HomeViewController: UIViewController {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .center
+        label.numberOfLines = 0
         label.font = .systemFont(ofSize: 15, weight: .semibold)
         label.backgroundColor = .customGray.withAlphaComponent(0.8)
         label.layer.cornerRadius = 10
@@ -252,24 +253,32 @@ extension HomeViewController {
     }
     
     private func youtubeURLRequest() {
-        NetworkManager.shared.youTube(api: .movieVideos(ID: movieID)) { responseList, errorText in
+        NetworkManager.shared.youTube(api: .movieVideos(ID: movieID)) { resultList, errorText in
             if let errorText {
-                self.prograssLabel.isHidden = false
-                self.view.addSubview(self.prograssLabel)
-                self.prograssLabel.snp.makeConstraints {
-                    $0.center.equalTo(self.view.safeAreaLayoutGuide)
-                    $0.size.equalTo(100)
-                }
-                self.prograssLabel.text = errorText
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                    self.prograssLabel.isHidden = true
-                }
+                self.showProgressLabel(text: errorText)
             } else {
-                guard let responseList else { return }
+                guard let resultList, !resultList.isEmpty else {
+                    self.showProgressLabel(text: "재생 정보를 찾지 못했어요")
+                    return
+                }
                 let youTubeVC = YouTubeViewController()
-                youTubeVC.youTubeURL = "https://www.youtube.com/watch?v=\(responseList[0].key)"
+                print("response: ", resultList)
+                youTubeVC.youTubeURL = "https://www.youtube.com/watch?v=\(resultList[0].key)"
                 self.navigationController?.pushViewController(youTubeVC, animated: true)
             }
+        }
+    }
+    
+    private func showProgressLabel(text: String) {
+        prograssLabel.isHidden = false
+        view.addSubview(self.prograssLabel)
+        prograssLabel.snp.makeConstraints {
+            $0.center.equalTo(self.view.safeAreaLayoutGuide)
+            $0.size.equalTo(100)
+        }
+        prograssLabel.text = text
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.prograssLabel.isHidden = true
         }
     }
 }
