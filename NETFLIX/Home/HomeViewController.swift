@@ -77,14 +77,16 @@ final class HomeViewController: UIViewController {
         return tableView
     }()
     
-//    private let prograssLabel = {
-//        let label = UILabel()
-//        label.textColor = .white
-//        label.textAlignment = .left
-//        label.font = .systemFont(ofSize: 18, weight: .heavy)
-//        label.backgroundColor = .gray.withAlphaComponent(0.5)
-//        return label
-//    }()
+    private let prograssLabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.backgroundColor = .customGray.withAlphaComponent(0.8)
+        label.layer.cornerRadius = 10
+        label.clipsToBounds = true
+        return label
+    }()
 //    private var urlSession = URLSession()
 //    var totalData: Double = 0
 //    var buffer: Data? {
@@ -107,10 +109,10 @@ final class HomeViewController: UIViewController {
         settingNavigation()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        urlSession.finishTasksAndInvalidate()
-    }
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//        urlSession.finishTasksAndInvalidate()
+//    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -155,6 +157,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeCollectionViewCell.identifier, for: indexPath) as! HomeCollectionViewCell
         let movieImageSource = trendMovieList[collectionView.tag][indexPath.item].poster_path
         cell.setMovieImage(url: "\(TMDBAPI.imageURL)\(movieImageSource)")
+        prograssLabel.isHidden = true
         return cell
     }
 }
@@ -245,12 +248,29 @@ extension HomeViewController {
     }
     
     @objc func PlayMovieButtonClicked() {
-//        youtubeURLRequest(movieID)
-//        view.addSubview(prograssLabel)
-//        prograssLabel.snp.makeConstraints {
-//            $0.center.equalTo(view.safeAreaLayoutGuide)
-//            $0.size.equalTo(50)
-//        }
+        youtubeURLRequest()
+    }
+    
+    private func youtubeURLRequest() {
+        NetworkManager.shared.youTube(api: .movieVideos(ID: movieID)) { responseList, errorText in
+            if let errorText {
+                self.prograssLabel.isHidden = false
+                self.view.addSubview(self.prograssLabel)
+                self.prograssLabel.snp.makeConstraints {
+                    $0.center.equalTo(self.view.safeAreaLayoutGuide)
+                    $0.size.equalTo(100)
+                }
+                self.prograssLabel.text = errorText
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    self.prograssLabel.isHidden = true
+                }
+            } else {
+                guard let responseList else { return }
+                let youTubeVC = YouTubeViewController()
+                youTubeVC.youTubeURL = "https://www.youtube.com/watch?v=\(responseList[0].key)"
+                self.navigationController?.pushViewController(youTubeVC, animated: true)
+            }
+        }
     }
 }
 
