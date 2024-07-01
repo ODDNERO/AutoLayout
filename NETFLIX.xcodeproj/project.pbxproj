@@ -30,6 +30,7 @@
 		CE8CEF352C2ADE9B001BE6BA /* HomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEF342C2ADE9B001BE6BA /* HomeTableViewCell.swift */; };
 		CE8CEF3C2C2C29E8001BE6BA /* TMDBRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEF3B2C2C29E7001BE6BA /* TMDBRequest.swift */; };
 		CE8CEF3F2C2C621C001BE6BA /* Dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE8CEF3E2C2C621C001BE6BA /* Dummy.swift */; };
+		CEDFEC2F2C331FF200E580C5 /* YouTubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEDFEC2E2C331FF200E580C5 /* YouTubeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +56,7 @@
 		CE8CEF342C2ADE9B001BE6BA /* HomeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewCell.swift; sourceTree = "<group>"; };
 		CE8CEF3B2C2C29E7001BE6BA /* TMDBRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBRequest.swift; sourceTree = "<group>"; };
 		CE8CEF3E2C2C621C001BE6BA /* Dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dummy.swift; sourceTree = "<group>"; };
+		CEDFEC2E2C331FF200E580C5 /* YouTubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				CE8CEF3D2C2C29F8001BE6BA /* Network */,
 				CE8CEEFC2C295B96001BE6BA /* Custom */,
 				CE8CEF012C298044001BE6BA /* Home */,
+				CEDFEC2D2C331FB800E580C5 /* YouTube */,
 				CE8D1D4C2C2D11B00089C413 /* SignUp */,
 				CE8CEF022C29807A001BE6BA /* BoxOffice */,
 				CE127BF12C0F0B220062EA2A /* Assets.xcassets */,
@@ -169,6 +172,14 @@
 				CE127BFE2C0F69ED0062EA2A /* SignUpViewController.swift */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		CEDFEC2D2C331FB800E580C5 /* YouTube */ = {
+			isa = PBXGroup;
+			children = (
+				CEDFEC2E2C331FF200E580C5 /* YouTubeViewController.swift */,
+			);
+			path = YouTube;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -269,6 +280,7 @@
 				CE8CEF042C298240001BE6BA /* ldentifierProtocol.swift in Sources */,
 				CE8CEF3F2C2C621C001BE6BA /* Dummy.swift in Sources */,
 				CE8CEF112C29DDD9001BE6BA /* HomeCollectionView.swift in Sources */,
+				CEDFEC2F2C331FF200E580C5 /* YouTubeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
