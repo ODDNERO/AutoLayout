@@ -14,6 +14,7 @@ class NetworkManager {
     }
     
     typealias TMDBHandler = ([TMDBList]?, String?) -> Void
+    typealias TMDBVideoHandler = ([TMDBVideoResult]?, String?) -> Void
     
     func trend(api: TMDBRequest, completionHandler: @escaping TMDBHandler) {
         AF.request(api.endpoint,
@@ -32,16 +33,16 @@ class NetworkManager {
         }
     }
     
-    func youTube(api: TMDBRequest, completionHandler: @escaping TMDBHandler) {
+    func youTube(api: TMDBRequest, completionHandler: @escaping TMDBVideoHandler) {
         AF.request(api.endpoint,
                    method: api.method,
                    parameters: api.parameter,
                    encoding: URLEncoding(destination: .queryString),
                    headers: api.header)
-        .responseDecodable(of: TMDB.self) { response in
+        .responseDecodable(of: TMDBVideo.self) { response in
             switch response.result {
-            case .success(let TMDB):
-                completionHandler(TMDB.results, nil)
+            case .success(let TMDBVideo):
+                completionHandler(TMDBVideo.results, nil)
             case .failure(let error):
                 print("------- youTube failure ------- \n", error)
                 completionHandler(nil, "연결 실패!")

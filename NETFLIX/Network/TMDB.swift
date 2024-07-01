@@ -21,9 +21,8 @@ struct TMDBList: Decodable {
     let release_date: String
     let vote_average: Float
     let overview: String
-    let key: String?
     
-    init(id: Int = 0, title: String = "", poster_path: String = "", backdrop_path: String? = nil, release_date: String = "", vote_average: Float = 0, overview: String = "", key: String = "") {
+    init(id: Int = 0, title: String = "", poster_path: String = "", backdrop_path: String? = nil, release_date: String = "", vote_average: Float = 0, overview: String = "") {
         self.id = id
         self.title = title
         self.poster_path = poster_path
@@ -31,6 +30,14 @@ struct TMDBList: Decodable {
         self.release_date = release_date
         self.vote_average = vote_average
         self.overview = overview
-        self.key = key
     }
+}
+
+struct TMDBVideo: Decodable {
+    let id: Int
+    var results: [TMDBVideoResult]
+}
+
+struct TMDBVideoResult: Decodable {
+    let key: String
 }
