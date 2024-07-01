@@ -231,7 +231,12 @@ extension HomeViewController {
                     let dummyList = Dummy.shared.similar.shuffled()
                     self.trendMovieList[0] = dummyList
                 } else {
-                    guard let movieList else { return }
+                    guard let movieList, !movieList.isEmpty else {
+                        let dummyList = Dummy.shared.similar.shuffled()
+                        self.trendMovieList[0] = dummyList
+                        group.leave()
+                        return
+                    }
                     self.trendMovieList[0] = movieList
                 }
                 group.leave()
@@ -244,7 +249,12 @@ extension HomeViewController {
                     let dummyList = Dummy.shared.recommendations.shuffled()
                     self.trendMovieList[1] = dummyList
                 } else {
-                    guard let movieList else { return }
+                    guard let movieList, !movieList.isEmpty else {
+                        let dummyList = Dummy.shared.recommendations.shuffled()
+                        self.trendMovieList[1] = dummyList
+                        group.leave()
+                        return
+                    }
                     self.trendMovieList[1] = movieList
                 }
                 group.leave()
