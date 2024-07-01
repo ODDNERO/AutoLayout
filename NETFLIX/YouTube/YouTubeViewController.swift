@@ -13,17 +13,23 @@ final class YouTubeViewController: UIViewController {
     var youTubeURL: String = ""
     
     private let webview = WKWebView()
-    lazy var url = URL(string: youTubeURL)
-    lazy var request = URLRequest(url: url!)
+    private lazy var url = URL(string: youTubeURL)
+    private lazy var request = URLRequest(url: url!)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         webview.load(request)
-        view.backgroundColor = .white
+        view.backgroundColor = .netflix
         view.addSubview(webview)
         webview.snp.makeConstraints {
-            $0.edges.equalTo(view.safeAreaLayoutGuide)
+            $0.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view)
         }
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
     }
 }
-

@@ -264,6 +264,7 @@ extension HomeViewController {
                 let youTubeVC = YouTubeViewController()
                 print("response: ", resultList)
                 youTubeVC.youTubeURL = "https://www.youtube.com/watch?v=\(resultList[0].key)"
+                youTubeVC.hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(youTubeVC, animated: true)
             }
         }
