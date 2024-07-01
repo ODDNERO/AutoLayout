@@ -196,19 +196,30 @@ extension HomeViewController {
     }
     
     @objc func firstMovieClicked() {
+        setMovieImageBorder(firstTrendMovieImageView)
         showTableView()
         self.movieID = self.top3MovieIDList[0]
         settingPlayMovieButton()
     }
     @objc func secondMovieClicked() {
+        setMovieImageBorder(secondTrendMovieImageView)
         showTableView()
         self.movieID = self.top3MovieIDList[1]
         settingPlayMovieButton()
     }
     @objc func thirdMovieClicked() {
+        setMovieImageBorder(thirdTrendMovieImageView)
         showTableView()
         self.movieID = self.top3MovieIDList[2]
         settingPlayMovieButton()
+    }
+    private func setMovieImageBorder(_ sender: UIImageView) {
+        [firstTrendMovieImageView, secondTrendMovieImageView, thirdTrendMovieImageView].forEach {
+            $0.layer.borderWidth = 0
+            $0.layer.borderColor = UIColor.clear.cgColor
+        }
+        sender.layer.borderWidth = 2.5
+        sender.layer.borderColor = UIColor.netflix.cgColor
     }
     
     private func fetchMoviePostgerImages() {
@@ -247,7 +258,6 @@ extension HomeViewController {
     private func settingPlayMovieButton() {
         playMovieButton.addTarget(self, action: #selector(PlayMovieButtonClicked), for: .touchUpInside)
     }
-    
     @objc func PlayMovieButtonClicked() {
         youtubeURLRequest()
     }
