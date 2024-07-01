@@ -31,4 +31,21 @@ class NetworkManager {
             }
         }
     }
+    
+    func youTube(api: TMDBRequest, completionHandler: @escaping TMDBHandler) {
+        AF.request(api.endpoint,
+                   method: api.method,
+                   parameters: api.parameter,
+                   encoding: URLEncoding(destination: .queryString),
+                   headers: api.header)
+        .responseDecodable(of: TMDB.self) { response in
+            switch response.result {
+            case .success(let TMDB):
+                completionHandler(TMDB.results, nil)
+            case .failure(let error):
+                print("------- youTube failure ------- \n", error)
+                completionHandler(nil, "연결 실패!")
+            }
+        }
+    }
 }
