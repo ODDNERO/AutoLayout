@@ -15,6 +15,7 @@ enum TMDBRequest {
     case recommendations(ID: Int)
     case search(text: String)
     case movieImages(ID: Int)
+    case movieVideos(ID: Int)
     
     var baseURL: String {
         return "https://api.themoviedb.org/"
@@ -41,6 +42,8 @@ enum TMDBRequest {
             URL(string: baseURL + APIVersion + "search/movie")!
         case .movieImages(let ID):
             URL(string: baseURL + APIVersion + "movie/\(ID)/images")!
+        case .movieVideos(let ID):
+            URL(string: baseURL + APIVersion + "movie/\(ID)/videos")!
         }
     }
     
@@ -54,7 +57,7 @@ enum TMDBRequest {
     
     var parameter: Parameters {
         switch self {
-        case .trendMovie, .trendTV, .similar, .recommendations:
+        case .trendMovie, .trendTV, .similar, .recommendations, .movieVideos:
             return ["language": "ko-KR"]
         case .search(let query):
             return ["language": "ko-KR", "query": query]
