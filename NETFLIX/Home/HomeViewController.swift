@@ -9,31 +9,31 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class HomeViewController: UIViewController {
-//    let homeMovieImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = .init(named: "겨울왕국")
-//        imageView.contentMode = .scaleAspectFill
-//        imageView.layer.cornerRadius = 6
-//        return imageView
-//    }()
-//    let movieBackgroundImageView = {
-//        let imageView = UIImageView()
-//        imageView.contentMode = .scaleToFill
-//        return imageView
-//    }()
-//    
-//    let movieKeywordLabel = {
-//        let label = UILabel()
-//        label.text = "애니메이션 · 모험 · 뮤지컬 · 가족 · 판타지"
-//        label.textColor = .white
-//        label.textAlignment = .center
-//        return label
-//    }()
+final class HomeViewController: UIViewController {
+    //    let homeMovieImageView = {
+    //        let imageView = UIImageView()
+    //        imageView.image = .init(named: "겨울왕국")
+    //        imageView.contentMode = .scaleAspectFill
+    //        imageView.layer.cornerRadius = 6
+    //        return imageView
+    //    }()
+    //    let movieBackgroundImageView = {
+    //        let imageView = UIImageView()
+    //        imageView.contentMode = .scaleToFill
+    //        return imageView
+    //    }()
+    //
+    //    let movieKeywordLabel = {
+    //        let label = UILabel()
+    //        label.text = "애니메이션 · 모험 · 뮤지컬 · 가족 · 판타지"
+    //        label.textColor = .white
+    //        label.textAlignment = .center
+    //        return label
+    //    }()
     
-    let playMovieButton = PointButton(title: "재생", image: UIImage(systemName: "play.fill")!, foreColor: .black, backColor: .white)
-    let wishMovieListButton = PointButton(title: "내가 찜한 리스트", image: UIImage(systemName: "plus")!, foreColor: .white, backColor: .deepDarkGray)
-    let buttonStackView = {
+    private let playMovieButton = PointButton(title: "재생", image: UIImage(systemName: "play.fill")!, foreColor: .black, backColor: .white)
+    private let wishMovieListButton = PointButton(title: "내가 찜한 리스트", image: UIImage(systemName: "plus")!, foreColor: .white, backColor: .deepDarkGray)
+    private let buttonStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 15
@@ -41,7 +41,7 @@ class HomeViewController: UIViewController {
         return stackView
     }()
     
-    let todayTrendMovieLabel = {
+    private let todayTrendMovieLabel = {
         let label = UILabel()
         label.text = "🔥 오늘의 인기 영화 TOP3 🔥"
         label.textColor = .white
@@ -49,10 +49,10 @@ class HomeViewController: UIViewController {
         label.font = .systemFont(ofSize: 18, weight: .heavy)
         return label
     }()
-    let firstTrendMovieImageView = Resource.movieImageView()
-    let secondTrendMovieImageView = Resource.movieImageView()
-    let thirdTrendMovieImageView = Resource.movieImageView()
-    let movieImageStackView = {
+    private let firstTrendMovieImageView = Resource.movieImageView()
+    private let secondTrendMovieImageView = Resource.movieImageView()
+    private let thirdTrendMovieImageView = Resource.movieImageView()
+    private let movieImageStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 8
@@ -60,15 +60,15 @@ class HomeViewController: UIViewController {
         return stackView
     }()
     
-    var top3MovieIDList = [0, 0, 0]
-    var movieID = 0 {
+    private var top3MovieIDList = [0, 0, 0]
+    private var movieID = 0 {
         didSet {
             self.fetchMoviePostgerImages()
         }
     }
     
-    var trendMovieList = [[TMDBList()], [TMDBList()]]
-    lazy var homeTableView = {
+    private var trendMovieList = [[TMDBList()], [TMDBList()]]
+    private lazy var homeTableView = {
         let tableView =  UITableView()
         tableView.backgroundColor = .clear
         tableView.delegate = self
@@ -76,6 +76,23 @@ class HomeViewController: UIViewController {
         tableView.register(HomeTableViewCell.self, forCellReuseIdentifier: HomeTableViewCell.identifier)
         return tableView
     }()
+    
+//    private let prograssLabel = {
+//        let label = UILabel()
+//        label.textColor = .white
+//        label.textAlignment = .left
+//        label.font = .systemFont(ofSize: 18, weight: .heavy)
+//        label.backgroundColor = .gray.withAlphaComponent(0.5)
+//        return label
+//    }()
+//    private var urlSession = URLSession()
+//    var totalData: Double = 0
+//    var buffer: Data? {
+//        didSet {
+//            let result = Double(buffer?.count ?? 0) / totalData
+//            prograssLabel.text = "\(result * 100)% 완료"
+//        }
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,10 +103,17 @@ class HomeViewController: UIViewController {
     }
     
     override func viewIsAppearing(_ animated: Bool) {
+        super.viewIsAppearing(animated)
         settingNavigation()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        urlSession.finishTasksAndInvalidate()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         navigationController?.navigationBar.isHidden = false
     }
 }
@@ -137,7 +161,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 //MARK: - Network
 extension HomeViewController {
-    func settingTop3Movie() {
+    private func settingTop3Movie() {
         let imageViews = [firstTrendMovieImageView, secondTrendMovieImageView, thirdTrendMovieImageView]
         for index in 0..<imageViews.count {
             NetworkManager.shared.trend(api: .trendMovie, completionHandler: { movieList, errorText in
@@ -160,7 +184,7 @@ extension HomeViewController {
         }
     }
     
-    func configureSetting() {
+    private func configureSetting() {
         view.backgroundColor = .black
         firstTrendMovieImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(firstMovieClicked)))
         secondTrendMovieImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(secondMovieClicked)))
@@ -170,17 +194,20 @@ extension HomeViewController {
     @objc func firstMovieClicked() {
         showTableView()
         self.movieID = self.top3MovieIDList[0]
+        settingPlayMovieButton()
     }
     @objc func secondMovieClicked() {
         showTableView()
         self.movieID = self.top3MovieIDList[1]
+        settingPlayMovieButton()
     }
     @objc func thirdMovieClicked() {
         showTableView()
         self.movieID = self.top3MovieIDList[2]
+        settingPlayMovieButton()
     }
     
-    func fetchMoviePostgerImages() {
+    private func fetchMoviePostgerImages() {
         let group = DispatchGroup()
         group.enter()
         DispatchQueue.global().async(group: group) {
@@ -212,11 +239,65 @@ extension HomeViewController {
             self.homeTableView.reloadData()
         }
     }
+    
+    private func settingPlayMovieButton() {
+        playMovieButton.addTarget(self, action: #selector(PlayMovieButtonClicked), for: .touchUpInside)
+    }
+    
+    @objc func PlayMovieButtonClicked() {
+//        youtubeURLRequest(movieID)
+//        view.addSubview(prograssLabel)
+//        prograssLabel.snp.makeConstraints {
+//            $0.center.equalTo(view.safeAreaLayoutGuide)
+//            $0.size.equalTo(50)
+//        }
+    }
 }
+
+//extension HomeViewController: URLSessionDataDelegate {
+//    private func youtubeURLRequest(_ movieID: Int) {
+//        let url = TMDBRequest.movieVideos(ID: movieID).endpoint
+//        let request = URLRequest(url: url)
+//        urlSession = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
+//        urlSession.dataTask(with: request).resume()
+//    }
+//    
+//    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse) async -> URLSession.ResponseDisposition {
+//        if let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) {
+//            let contentLength = response.value(forHTTPHeaderField: "Content-Length")!
+//            totalData = Double(contentLength)!
+//            return .allow
+//        } else {
+//            return .cancel
+//        }
+//    }
+//    
+//    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+//        print(#function, data)
+//        buffer?.append(data)
+//    }
+//    
+//    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: (any Error)?) {
+//        print(#function, error)
+//        if let error {
+//            prograssLabel.text = "문제가 발생했습니다."
+//        } else {
+//            print("성공")
+//            guard let buffer = buffer else {
+//                print("buffer nil")
+//                return
+//            }
+//            let youTubeVC = YouTubeViewController()
+//            youTubeVC.youTubeURL = "https://www.youtube.com/watch?v=\()"
+//            navigationController?.pushViewController(youTubeVC, animated: true)
+//        }
+//    }
+//}
+
 
 //MARK: - UI
 extension HomeViewController {
-    func showTableView() {
+    private func showTableView() {
         view.addSubview(homeTableView)
         homeTableView.snp.makeConstraints {
             $0.top.equalTo(buttonStackView.snp.bottom).offset(18)
@@ -224,7 +305,7 @@ extension HomeViewController {
         }
     }
     
-    func configureHierarchy() {
+    private func configureHierarchy() {
         [playMovieButton, wishMovieListButton].forEach {
             buttonStackView.addArrangedSubview($0)
         }
@@ -235,13 +316,13 @@ extension HomeViewController {
         [todayTrendMovieLabel, movieImageStackView, buttonStackView].forEach {
             self.view.addSubview($0)
         }
-
-//        [homeView, userNameLabel, homeMovieImageView, movieBackgroundImageView, movieKeywordLabel].forEach {
-//            view.addSubview($0)
-//        }
+        
+        //        [homeView, userNameLabel, homeMovieImageView, movieBackgroundImageView, movieKeywordLabel].forEach {
+        //            view.addSubview($0)
+        //        }
     }
-
-    func configureLayout() {
+    
+    private func configureLayout() {
         todayTrendMovieLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide)
             $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(12)
@@ -264,7 +345,7 @@ extension HomeViewController {
 
 //MARK: - Switching View
 extension HomeViewController {
-    func settingNavigation() {
+    private func settingNavigation() {
         navigationItem.backButtonTitle = ""
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.tintColor = .white
